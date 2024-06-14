@@ -32,7 +32,6 @@
         .form-control {
             border: 1px solid #ccc;
             border-radius: 20px;
-            //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 25px;
             font-size: 16px;
             text-align: center; 

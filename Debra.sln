@@ -11,6 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopApplication", "Deskt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{C4C01B3B-6100-41A5-B064-7AEAC54A2B17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{396BFE7C-0470-4E41-A7F1-0F659B98ED23} = {396BFE7C-0470-4E41-A7F1-0F659B98ED23}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
