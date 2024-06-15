@@ -22,7 +22,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            max-width: 400px;
+            max-width: 500px;
             width: 100%;
             color: #000;
         }
@@ -69,6 +69,18 @@
             font-size: 72px;
             font-weight: bold;
         }
+        .registration-text {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .registration-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .registration-link:hover {
+            text-decoration: underline;
+        }
     </style>
     <script>
         function validateForm() {
@@ -83,19 +95,26 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div class="container">
-            <h2 class="form-heading"><span class="small-text">Welcome to</span><br /><span class="large-text">Debra</span></h2>
-            <div class="login-form">
-                <div class="form-group">
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Placeholder="Email address" TextMode="Email"></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" Placeholder="Password" TextMode="Password"></asp:TextBox>
-                </div>
-                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Login" CssClass="btn btn-login" OnClientClick="return validateForm();" />
+<form id="form1" runat="server">
+    <div class="container">
+        <h2 class="form-heading">
+            <span class="small-text">Welcome to</span><br />
+            <span class="large-text">DEBRA</span>
+        </h2>
+        <div class="login-form">
+            <div class="form-group">
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Placeholder="Email address" TextMode="Email"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" Placeholder="Password" TextMode="Password"></asp:TextBox>
+            </div>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Login" CssClass="btn btn-login" OnClientClick="return validateForm();" />
+            <div class="registration-text">
+                <span>Don't have an account? </span>
+                <asp:HyperLink ID="lnkRegister" runat="server" NavigateUrl="~/Registration.aspx" CssClass="registration-link">Click here to register</asp:HyperLink>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 </body>
 </html>

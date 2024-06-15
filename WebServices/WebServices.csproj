@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LoginWebService.asmx" />
+    <Content Include="RegistrationWebService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +128,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationWebService.asmx.cs">
+      <DependentUpon>RegistrationWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -27,7 +27,7 @@ namespace WebServices
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "SELECT COUNT(*) FROM users WHERE email = @Email AND password = @Password";
+                    string query = "SELECT COUNT(*) FROM useraccounts WHERE email = @Email AND password = @Password";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Password", password);

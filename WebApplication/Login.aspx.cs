@@ -26,7 +26,7 @@ namespace WebApplication1
 
                 if (result == "Login successful")
                 {
-                    Response.Redirect("default.aspx");
+                    Response.Redirect("Default.aspx");
                 }
             }
             catch (Exception ex)
