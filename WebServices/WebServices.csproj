@@ -119,12 +119,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LoginWebService.asmx" />
+    <Content Include="PartnerWebServices.asmx" />
     <Content Include="RegistrationWebService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoginWebService.asmx.cs">
       <DependentUpon>LoginWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PartnerWebServices.asmx.cs">
+      <DependentUpon>PartnerWebServices.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

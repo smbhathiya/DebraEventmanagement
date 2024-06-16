@@ -18,6 +18,9 @@
             text-align: left;
             padding: 20px 10px 10px 20px;
         }
+        .top-bar h1{
+            font-weight:800;
+        }
         .container {
             display: flex;
             flex-direction: column;
@@ -165,7 +168,7 @@
         }
 
         window.onload = function () {
-            switchForm('user'); // Default to user form
+            switchForm('user'); 
         };
     </script>
 </head>

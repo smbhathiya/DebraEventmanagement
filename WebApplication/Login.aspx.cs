@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,7 +10,6 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -21,19 +18,34 @@ namespace WebApplication1
             {
                 LoginWebServiceSoapClient service = new LoginWebServiceSoapClient();
                 string result = service.Login(txtEmail.Text, txtPassword.Text);
-
-                ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('" + result + "');", true);
-
-                if (result == "Login successful")
+                if (result.StartsWith("Login successful"))
                 {
-                    Response.Redirect("Default.aspx");
+                    string[] parts = result.Split('|');
+                    string userType = parts[1];
+
+                    Session["Email"] = txtEmail.Text;
+                    Session["UserType"] = userType;
+
+                    if (userType == "user")
+                    {
+                        Response.Redirect("Home.aspx");
+                    }
+                    else if (userType == "partner")
+                    {
+                        Response.Redirect("Default.aspx");
+                    }
+
                 }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('" + result + "');", true);
+                }
+
             }
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('An error occurred: " + ex.Message + "');", true);
             }
         }
-
     }
 }
