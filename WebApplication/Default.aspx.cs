@@ -55,18 +55,14 @@ namespace WebApplication1
             DateTime timeValue = DateTime.ParseExact(TextBox5.Text, "HH:mm", CultureInfo.InvariantCulture);
             string time = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
 
-
-            //string time = TextBox5.Text;
             string location = TextBox6.Text;
 
             PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
 
             string result = service.AddEvent(eventId, eventName, ticketPrice, email, date, time, location);
 
-            // Refresh the GridView after adding the event
             LoadUserEvents(email);
 
-            // Display the result
             Response.Write("<script>alert('" + result + "');</script>");
         }
 
