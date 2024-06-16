@@ -39,10 +39,10 @@ namespace WebApplication1.PartnerServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateEvent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string UpdateEvent(string eventId, string eventName, string ticketPrice, string date, string time, string location);
+        string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateEvent", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> UpdateEventAsync(string eventId, string eventName, string ticketPrice, string date, string time, string location);
+        System.Threading.Tasks.Task<string> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -96,12 +96,12 @@ namespace WebApplication1.PartnerServiceReference {
             return base.Channel.DeleteEventAsync(eventid);
         }
         
-        public string UpdateEvent(string eventId, string eventName, string ticketPrice, string date, string time, string location) {
-            return base.Channel.UpdateEvent(eventId, eventName, ticketPrice, date, time, location);
+        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location) {
+            return base.Channel.UpdateEvent(eventId, event_name, ticket_price, date, time, location);
         }
         
-        public System.Threading.Tasks.Task<string> UpdateEventAsync(string eventId, string eventName, string ticketPrice, string date, string time, string location) {
-            return base.Channel.UpdateEventAsync(eventId, eventName, ticketPrice, date, time, location);
+        public System.Threading.Tasks.Task<string> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location) {
+            return base.Channel.UpdateEventAsync(eventId, event_name, ticket_price, date, time, location);
         }
     }
 }

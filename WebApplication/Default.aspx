@@ -32,6 +32,7 @@
         }
         .btn-custom:hover {
             background-color: #333;
+             color: #fff;
         }
         .section {
             margin-bottom: 20px;
@@ -56,27 +57,32 @@
             border-color: #007bff;
         }
         .table {
-            width: 100%;
-            max-width: 100%;
-            margin-bottom: 1rem;
-            background-color: transparent;
-        }
-        .table th,
-        .table td {
-            padding: 1rem;
-            vertical-align: top;
-            border-top: 1px solid #dee2e6;
-        }
-        .table thead th {
-            vertical-align: bottom;
-            border-bottom: 2px solid #dee2e6;
-        }
-        .table tbody + tbody {
-            border-top: 2px solid #dee2e6;
-        }
-        .table .table {
-            background-color: #fff;
-        }
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem; 
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table .table {
+    background-color: #fff;
+}
+
      .form-group {
         min-width: 100px; 
     }
@@ -92,22 +98,20 @@
 
         if (sectionId === 'addEventSection') {
             document.getElementById('extraFields').style.display = 'block';
-            generateEventID(); // Call the function to generate event ID when showing addEventSection
+            generateEventID(); 
         } else {
             document.getElementById('extraFields').style.display = 'none';
         }
     }
 
     function generateEventID() {
-        // Get the current date and time
         var now = new Date();
-        var year = now.getFullYear().toString().slice(-2); // Get the last two digits of the year
-        var month = ('0' + (now.getMonth() + 1)).slice(-2); // Add leading zero if month is less than 10
-        var day = ('0' + now.getDate()).slice(-2); // Add leading zero if day is less than 10
-        var hours = ('0' + now.getHours()).slice(-2); // Add leading zero if hours is less than 10
-        var minutes = ('0' + now.getMinutes()).slice(-2); // Add leading zero if minutes is less than 10
+        var year = now.getFullYear().toString().slice(-2);
+        var month = ('0' + (now.getMonth() + 1)).slice(-2); 
+        var day = ('0' + now.getDate()).slice(-2); 
+        var hours = ('0' + now.getHours()).slice(-2); 
+        var minutes = ('0' + now.getMinutes()).slice(-2); 
 
-        // Generate the event ID
         var eventID = year + month + day + hours + minutes;
 
         var eventIDTextBox = document.getElementById('eventidtxtbox');
@@ -183,11 +187,19 @@
     <asp:Button ID="Button4" runat="server" Text="Add Event" CssClass="btn btn-custom" OnClick="AddEventtodb_Click" />
 </div>
 
+<%--table--%>
 <asp:GridView ID="gvEvents" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered"
     OnRowEditing="gvEvents_RowEditing" OnRowUpdating="gvEvents_RowUpdating" OnRowDeleting="gvEvents_RowDeleting"
     OnRowCancelingEdit="gvEvents_RowCancelingEdit">
     <Columns>
-        <asp:BoundField DataField="eventid" HeaderText="Event ID" ReadOnly="true" />
+        <asp:TemplateField HeaderText="Event ID">
+            <ItemTemplate>
+                <asp:Label ID="lblEventId" runat="server" Text='<%# Eval("eventid") %>'></asp:Label>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtEventId" runat="server" Text='<%# Bind("eventid") %>' CssClass="form-control" Enabled="false"></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
         <asp:TemplateField HeaderText="Event Name">
             <ItemTemplate>
                 <asp:Label ID="lblEventName" runat="server" Text='<%# Eval("event_name") %>'></asp:Label>
@@ -228,32 +240,16 @@
                 <asp:TextBox ID="txtLocation" runat="server" Text='<%# Bind("location") %>' CssClass="form-control"></asp:TextBox>
             </EditItemTemplate>
         </asp:TemplateField>
-
         <asp:TemplateField ShowHeader="False">
-    <ItemTemplate>
-        <div class="form-row">
-            <div class="form-group col-md-6">
+            <ItemTemplate>
                 <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn-primary btn-sm btn-block" />
-            </div>
-            <div class="form-group col-md-6">
                 <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument='<%# Eval("eventid") %>' Text="Delete" CssClass="btn btn-danger btn-sm btn-block" OnClick="DeleteEvent_Click" OnClientClick="return confirm('Are you sure you want to delete this event?');" />
-            </div>
-        </div>
-    </ItemTemplate>
-    <EditItemTemplate>
-        <div class="form-row " >
-            <div class="form-group col-md-6">
+            </ItemTemplate>
+            <EditItemTemplate>
                 <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-sm btn-block" />
-            </div>
-            <div class="form-group col-md-6">
                 <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm btn-block" />
-            </div>
-        </div>
-    </EditItemTemplate>
-</asp:TemplateField>
-
-
-
+            </EditItemTemplate>
+        </asp:TemplateField>
     </Columns>
 </asp:GridView>
 

@@ -101,35 +101,44 @@ namespace WebServices
 
 
         [WebMethod]
-        public string UpdateEvent(string eventId, string eventName, string ticketPrice, string date, string time, string location)
+        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location)
         {
-            string query = "UPDATE Events SET EventName = @EventName, TicketPrice = @TicketPrice, Date = @Date, Time = @Time, Location = @Location WHERE EventID = @EventID";
+            string query = "UPDATE Events SET event_name = @EventName, ticket_price = @TicketPrice, Date = @Date, Time = @Time, Location = @Location WHERE EventID = @EventID";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@EventID", eventId);
-                command.Parameters.AddWithValue("@EventName", eventName);
-                command.Parameters.AddWithValue("@TicketPrice", ticketPrice);
-                command.Parameters.AddWithValue("@Date", date);
-                command.Parameters.AddWithValue("@Time", time);
-                command.Parameters.AddWithValue("@Location", location);
-
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    return "Event updated successfully.";
-                }
-                else
-                {
-                    return "Failed to update event.";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@EventID", eventId);
+                    command.Parameters.AddWithValue("@EventName", event_name);
+                    command.Parameters.AddWithValue("@TicketPrice", ticket_price);
+                    command.Parameters.AddWithValue("@Date", date);
+                    command.Parameters.AddWithValue("@Time", time);
+                    command.Parameters.AddWithValue("@Location", location);
+
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return "Event updated successfully.";
+                    }
+                    else
+                    {
+                        return "Failed to update event.";
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                return "An error occurred: " + ex.Message;
+            }
         }
-    }
-}
 
-    
+    }
+    }
+
+
+
 

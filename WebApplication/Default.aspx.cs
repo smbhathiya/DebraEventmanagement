@@ -94,31 +94,71 @@ namespace WebApplication1
             try
             {
                 GridViewRow row = gvEvents.Rows[e.RowIndex];
-                string eventId = gvEvents.DataKeys[e.RowIndex].Value.ToString();
-                string eventName = (row.FindControl("txtEventName") as TextBox).Text;
-                string ticketPrice = (row.FindControl("txtTicketPrice") as TextBox).Text;
-                string date = (row.FindControl("txtDate") as TextBox).Text;
-                string time = (row.FindControl("txtTime") as TextBox).Text;
-                string location = (row.FindControl("txtLocation") as TextBox).Text;
 
-                // Call the service method to update the event
-                PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
-                string result = service.UpdateEvent(eventId, eventName, ticketPrice, date, time, location);
+                // FindControl and null checks
+                TextBox txtEventId = row.FindControl("txtEventId") as TextBox;
+                TextBox txtEventName = row.FindControl("txtEventName") as TextBox;
+                TextBox txtTicketPrice = row.FindControl("txtTicketPrice") as TextBox;
+                TextBox txtDate = row.FindControl("txtDate") as TextBox;
+                TextBox txtTime = row.FindControl("txtTime") as TextBox;
+                TextBox txtLocation = row.FindControl("txtLocation") as TextBox;
 
-                // Exit edit mode
-                gvEvents.EditIndex = -1;
+                // Collect control statuses
+                string missingControls = "";
+                if (txtEventId == null) missingControls += "txtEventId, ";
+                if (txtEventName == null) missingControls += "txtEventName, ";
+                if (txtTicketPrice == null) missingControls += "txtTicketPrice, ";
+                if (txtDate == null) missingControls += "txtDate, ";
+                if (txtTime == null) missingControls += "txtTime, ";
+                if (txtLocation == null) missingControls += "txtLocation, ";
 
-                // Reload the GridView
-                string email = Session["Email"]?.ToString();
-                LoadUserEvents(email);
+                if (!string.IsNullOrEmpty(missingControls))
+                {
+                    // Remove the last comma and space
+                    missingControls = missingControls.TrimEnd(',', ' ');
+                    // Handle error
+                    throw new Exception("The following controls were not found during the update process: " + missingControls);
+                }
 
-                // Show the result
-                Response.Write("<script>alert('" + result + "');</script>");
+                string eventId = txtEventId.Text;
+                string eventName = txtEventName.Text;
+                string ticketPrice = txtTicketPrice.Text;
+                string date = txtDate.Text;
+                string time = txtTime.Text;
+                string location = txtLocation.Text;
+
+                DateTime timeValue;
+                if (DateTime.TryParseExact(time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out timeValue))
+                {
+                    string formattedTime = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
+
+                    PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
+                    string result = service.UpdateEvent(eventId, eventName, ticketPrice, date, formattedTime, location);
+
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        // Log result for debugging
+                        Response.Write("<script>alert('Update Result: " + result + "');</script>");
+                    }
+                    else
+                    {
+                        throw new Exception("Update failed with an empty response.");
+                    }
+
+                    gvEvents.EditIndex = -1;
+                    string email = Session["Email"]?.ToString();
+                    LoadUserEvents(email);
+                }
+                else
+                {
+                    // Handle invalid time format
+                    throw new FormatException("Invalid time format.");
+                }
             }
             catch (Exception ex)
             {
-                // Handle any exceptions
-                Response.Write($"<script>alert('Error: {ex.Message}');</script>");
+                // Display the error message
+                Response.Write("<script>alert('An error occurred while updating the event: " + ex.Message + "');</script>");
             }
         }
 
@@ -131,7 +171,11 @@ namespace WebApplication1
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("~/Login.aspx");
         }
+
 
 
 
