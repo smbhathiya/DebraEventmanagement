@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.PartnerServiceReference;
@@ -50,7 +51,12 @@ namespace WebApplication1
             string ticketPrice = ticketPriceTxtBox.Text;
             string email = Session["Email"]?.ToString();
             string date = datbox.Text;
-            string time = TextBox5.Text;
+
+            DateTime timeValue = DateTime.ParseExact(TextBox5.Text, "HH:mm", CultureInfo.InvariantCulture);
+            string time = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
+
+
+            //string time = TextBox5.Text;
             string location = TextBox6.Text;
 
             PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
