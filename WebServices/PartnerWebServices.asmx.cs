@@ -23,7 +23,7 @@ namespace WebServices
         private string connectionString = "Server=localhost;Database=debradb;Uid=root;Pwd=;";
 
         [WebMethod]
-        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData)
+        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData, int remainingTickets)
         {
             try
             {
@@ -61,7 +61,8 @@ namespace WebServices
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "INSERT INTO events (eventid, event_name, ticket_price, email, date, time, location, description, imageUrl) VALUES (@EventID, @EventName, @TicketPrice, @Email, @Date, @Time, @Location, @Description, @ImageUrl)";
+                    string query = "INSERT INTO events (eventid, event_name, ticket_price, email, date, time, location, description, imageUrl, soldTickets, remainingTickets) " +
+                                   "VALUES (@EventID, @EventName, @TicketPrice, @Email, @Date, @Time, @Location, @Description, @ImageUrl, @SoldTickets, @RemainingTickets)";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@EventID", eventid);
                     cmd.Parameters.AddWithValue("@EventName", event_name);
@@ -72,6 +73,8 @@ namespace WebServices
                     cmd.Parameters.AddWithValue("@Location", location);
                     cmd.Parameters.AddWithValue("@Description", description);
                     cmd.Parameters.AddWithValue("@ImageUrl", imageUrl);
+                    cmd.Parameters.AddWithValue("@SoldTickets", 0);
+                    cmd.Parameters.AddWithValue("@RemainingTickets", remainingTickets);
                     cmd.ExecuteNonQuery();
                     return "Event added successfully.";
                 }
@@ -82,6 +85,8 @@ namespace WebServices
             }
         }
 
+
+
         [WebMethod]
         public DataSet GetEventsByUserEmail(string email)
         {
@@ -90,7 +95,7 @@ namespace WebServices
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT eventid, event_name, ticket_price, email, date, time, location, description, imageUrl FROM events WHERE email = @Email";
+                    string query = "SELECT eventid, event_name, ticket_price, email, date, time, location, description, imageUrl, soldTickets, remainingTickets FROM events WHERE email = @Email";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@Email", email);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -158,13 +163,10 @@ namespace WebServices
             }
         }
 
-
-
-
         [WebMethod]
-        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData)
+        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData, int soldTickets, int remainingTickets)
         {
-            string query = "UPDATE Events SET event_name = @EventName, ticket_price = @TicketPrice, Date = @Date, Time = @Time, Location = @Location, Description = @Description, ImageUrl = @ImageUrl WHERE EventID = @EventID";
+            string query = "UPDATE Events SET event_name = @EventName, ticket_price = @TicketPrice, Date = @Date, Time = @Time, Location = @Location, Description = @Description, ImageUrl = @ImageUrl, soldTickets = @SoldTickets, remainingTickets = @RemainingTickets WHERE EventID = @EventID";
 
             try
             {
@@ -191,6 +193,8 @@ namespace WebServices
                     command.Parameters.AddWithValue("@Location", location);
                     command.Parameters.AddWithValue("@Description", description);
                     command.Parameters.AddWithValue("@ImageUrl", imageUrl);
+                    command.Parameters.AddWithValue("@SoldTickets", soldTickets);
+                    command.Parameters.AddWithValue("@RemainingTickets", remainingTickets);
 
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
@@ -210,6 +214,7 @@ namespace WebServices
                 return "An error occurred: " + ex.Message;
             }
         }
+
 
         private string SaveImage(string eventId, byte[] imageData)
         {

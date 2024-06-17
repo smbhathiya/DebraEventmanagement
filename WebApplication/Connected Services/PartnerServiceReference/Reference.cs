@@ -81,10 +81,13 @@ namespace WebApplication1.PartnerServiceReference {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] imageData;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=9)]
+        public int remainingTickets;
+        
         public AddEventRequest() {
         }
         
-        public AddEventRequest(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData) {
+        public AddEventRequest(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData, int remainingTickets) {
             this.eventid = eventid;
             this.event_name = event_name;
             this.ticket_price = ticket_price;
@@ -94,6 +97,7 @@ namespace WebApplication1.PartnerServiceReference {
             this.location = location;
             this.description = description;
             this.imageData = imageData;
+            this.remainingTickets = remainingTickets;
         }
     }
     
@@ -145,10 +149,16 @@ namespace WebApplication1.PartnerServiceReference {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] imageData;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=8)]
+        public int soldTickets;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=9)]
+        public int remainingTickets;
+        
         public UpdateEventRequest() {
         }
         
-        public UpdateEventRequest(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData) {
+        public UpdateEventRequest(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData, int soldTickets, int remainingTickets) {
             this.eventId = eventId;
             this.event_name = event_name;
             this.ticket_price = ticket_price;
@@ -157,6 +167,8 @@ namespace WebApplication1.PartnerServiceReference {
             this.location = location;
             this.description = description;
             this.imageData = imageData;
+            this.soldTickets = soldTickets;
+            this.remainingTickets = remainingTickets;
         }
     }
     
@@ -209,7 +221,7 @@ namespace WebApplication1.PartnerServiceReference {
             return base.Channel.AddEvent(request);
         }
         
-        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData) {
+        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData, int remainingTickets) {
             WebApplication1.PartnerServiceReference.AddEventRequest inValue = new WebApplication1.PartnerServiceReference.AddEventRequest();
             inValue.eventid = eventid;
             inValue.event_name = event_name;
@@ -220,6 +232,7 @@ namespace WebApplication1.PartnerServiceReference {
             inValue.location = location;
             inValue.description = description;
             inValue.imageData = imageData;
+            inValue.remainingTickets = remainingTickets;
             WebApplication1.PartnerServiceReference.AddEventResponse retVal = ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).AddEvent(inValue);
             return retVal.AddEventResult;
         }
@@ -229,7 +242,7 @@ namespace WebApplication1.PartnerServiceReference {
             return base.Channel.AddEventAsync(request);
         }
         
-        public System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.AddEventResponse> AddEventAsync(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData) {
+        public System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.AddEventResponse> AddEventAsync(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData, int remainingTickets) {
             WebApplication1.PartnerServiceReference.AddEventRequest inValue = new WebApplication1.PartnerServiceReference.AddEventRequest();
             inValue.eventid = eventid;
             inValue.event_name = event_name;
@@ -240,6 +253,7 @@ namespace WebApplication1.PartnerServiceReference {
             inValue.location = location;
             inValue.description = description;
             inValue.imageData = imageData;
+            inValue.remainingTickets = remainingTickets;
             return ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).AddEventAsync(inValue);
         }
         
@@ -264,7 +278,7 @@ namespace WebApplication1.PartnerServiceReference {
             return base.Channel.UpdateEvent(request);
         }
         
-        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData) {
+        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData, int soldTickets, int remainingTickets) {
             WebApplication1.PartnerServiceReference.UpdateEventRequest inValue = new WebApplication1.PartnerServiceReference.UpdateEventRequest();
             inValue.eventId = eventId;
             inValue.event_name = event_name;
@@ -274,6 +288,8 @@ namespace WebApplication1.PartnerServiceReference {
             inValue.location = location;
             inValue.description = description;
             inValue.imageData = imageData;
+            inValue.soldTickets = soldTickets;
+            inValue.remainingTickets = remainingTickets;
             WebApplication1.PartnerServiceReference.UpdateEventResponse retVal = ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).UpdateEvent(inValue);
             return retVal.UpdateEventResult;
         }
@@ -283,7 +299,7 @@ namespace WebApplication1.PartnerServiceReference {
             return base.Channel.UpdateEventAsync(request);
         }
         
-        public System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.UpdateEventResponse> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData) {
+        public System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.UpdateEventResponse> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData, int soldTickets, int remainingTickets) {
             WebApplication1.PartnerServiceReference.UpdateEventRequest inValue = new WebApplication1.PartnerServiceReference.UpdateEventRequest();
             inValue.eventId = eventId;
             inValue.event_name = event_name;
@@ -293,6 +309,8 @@ namespace WebApplication1.PartnerServiceReference {
             inValue.location = location;
             inValue.description = description;
             inValue.imageData = imageData;
+            inValue.soldTickets = soldTickets;
+            inValue.remainingTickets = remainingTickets;
             return ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).UpdateEventAsync(inValue);
         }
     }

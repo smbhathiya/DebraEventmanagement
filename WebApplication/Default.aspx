@@ -21,7 +21,7 @@
         }
 
             .top-bar h1 {
-                font-weight: 800;
+                font-weight: 700;
             }
 
         .container {
@@ -127,14 +127,14 @@
             background-color: #000;
             color: #fff;
             border-radius: 10px;
-            padding:8px;
+            padding: 8px;
             transition: background-color 0.3s ease;
         }
 
         .file-name {
             display: inline-block;
             margin-left: 10px;
-            font-weight:bold;
+            font-weight: bold;
         }
 
         /* You may need to adjust the styles based on your preference */
@@ -238,6 +238,7 @@
                             <asp:TextBox ID="datbox" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                         </div>
                     </div>
+
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <asp:Label ID="Label5" runat="server" Text="Time"></asp:Label>
@@ -249,12 +250,17 @@
                         </div>
                     </div>
 
+
                     <div class="form-row">
-                                                <div class="form-group col-md-6">
+                        <div class="form-group col-md-6">
                             <asp:Label ID="Label8" runat="server" Text="Event Description" CssClass="description-label"></asp:Label>
                             <asp:TextBox ID="TextBox7" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
                         </div>
                         <div class="form-group col-md-6">
+                            <div class="form-group">
+                                <asp:Label ID="Label9" runat="server" Text="Tickets Count"></asp:Label>
+                                <asp:TextBox ID="txtRemainingTickets" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
                             <asp:Label ID="Label7" runat="server" Text="Upload Cover Image" CssClass="upload-label"></asp:Label>
                             <div class="file-upload">
                                 <label for="FileUpload1" class="file-upload-btn">Choose File</label>
@@ -296,22 +302,22 @@
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Description">
-            <ItemTemplate>
-                <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("description") %>'></asp:Label>
-            </ItemTemplate>
-            <EditItemTemplate>
-                <asp:TextBox ID="txtDescription" runat="server" Text='<%# Bind("description") %>' CssClass="form-control"></asp:TextBox>
-            </EditItemTemplate>
-        </asp:TemplateField>
-        
-  <asp:TemplateField HeaderText="Cover Image">
-            <ItemTemplate>
-                <asp:Image ID="imgCover" runat="server" ImageUrl='<%# Eval("imageUrl") %>' Width="100px" Height="100px" />
-            </ItemTemplate>
-            <EditItemTemplate>
-                <asp:FileUpload ID="fileUpload" runat="server" CssClass="form-control-file" />
-            </EditItemTemplate>
-        </asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("description") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtDescription" runat="server" Text='<%# Bind("description") %>' CssClass="form-control"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Cover Image">
+                        <ItemTemplate>
+                            <asp:Image ID="imgCover" runat="server" ImageUrl='<%# Eval("imageUrl") %>' Width="100px" Height="100px" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:FileUpload ID="fileUpload" runat="server" CssClass="form-control-file" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Ticket Price">
                         <ItemTemplate>
@@ -321,6 +327,25 @@
                             <asp:TextBox ID="txtTicketPrice" runat="server" Text='<%# Bind("ticket_price") %>' CssClass="form-control"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Remaining Tickets">
+                        <ItemTemplate>
+                            <asp:Label ID="lblRemainingTickets" runat="server" Text='<%# Eval("remainingTickets") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtRemainingTickets" runat="server" Text='<%# Bind("remainingTickets") %>' CssClass="form-control"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Sold Tickets">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSoldTickets" runat="server" Text='<%# Eval("soldTickets") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtSoldTickets" runat="server" Text='<%# Bind("soldTickets") %>' CssClass="form-control"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
                     <asp:TemplateField HeaderText="Date">
                         <ItemTemplate>
                             <asp:Label ID="lblDate" runat="server" Text='<%# Eval("date") %>'></asp:Label>
@@ -329,6 +354,7 @@
                             <asp:TextBox ID="txtDate" runat="server" Text='<%# Bind("date") %>' TextMode="Date" CssClass="form-control"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
+
                     <asp:TemplateField HeaderText="Time">
                         <ItemTemplate>
                             <asp:Label ID="lblTime" runat="server" Text='<%# Eval("time") %>'></asp:Label>
@@ -337,6 +363,9 @@
                             <asp:TextBox ID="txtTime" runat="server" Text='<%# Bind("time") %>' TextMode="Time" CssClass="form-control"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
+
+   
+
                     <asp:TemplateField HeaderText="Location">
                         <ItemTemplate>
                             <asp:Label ID="lblLocation" runat="server" Text='<%# Eval("location") %>'></asp:Label>

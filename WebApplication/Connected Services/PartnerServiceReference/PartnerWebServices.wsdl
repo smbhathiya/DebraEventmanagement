@@ -14,6 +14,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="imageData" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="remainingTickets" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -70,6 +71,8 @@
             <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="imageData" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="soldTickets" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="remainingTickets" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>

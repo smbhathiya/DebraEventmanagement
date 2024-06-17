@@ -19,7 +19,7 @@
             padding: 20px 10px 10px 20px;
         }
         .top-bar h1{
-            font-weight:800;
+            font-weight:700;
         }
         .container {
             display: flex;

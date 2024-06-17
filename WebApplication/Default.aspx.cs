@@ -28,14 +28,12 @@ namespace WebApplication1
 
         private void LoadUserEvents(string email)
         {
-            PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
-
-            DataSet eventsDataSet = service.GetEventsByUserEmail(email);
+            var service = new PartnerWebServicesSoapClient();
+            var eventsDataSet = service.GetEventsByUserEmail(email);
 
             if (eventsDataSet != null && eventsDataSet.Tables.Count > 0 && eventsDataSet.Tables[0].Rows.Count > 0)
             {
-                DataTable dt = eventsDataSet.Tables[0];
-
+                var dt = eventsDataSet.Tables[0];
                 dt.Columns.Add("FullImageUrl", typeof(string));
 
                 foreach (DataRow row in dt.Rows)
@@ -55,7 +53,6 @@ namespace WebApplication1
             }
         }
 
-
         protected void AddEventtodb_Click(object sender, EventArgs e)
         {
             string eventId = eventidtxtbox.Text;
@@ -63,30 +60,25 @@ namespace WebApplication1
             string ticketPrice = ticketPriceTxtBox.Text;
             string email = Session["Email"]?.ToString();
             string date = datbox.Text;
-
-            DateTime timeValue = DateTime.ParseExact(TextBox5.Text, "HH:mm", CultureInfo.InvariantCulture);
-            string time = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
-
+            string time = DateTime.ParseExact(TextBox5.Text, "HH:mm", CultureInfo.InvariantCulture).ToString("hh:mm tt", CultureInfo.InvariantCulture);
             string location = TextBox6.Text;
             string description = TextBox7.Text;
+            int remainingTickets = int.Parse(txtRemainingTickets.Text);
 
             byte[] imageData = null;
             if (FileUpload1.HasFile)
             {
                 using (Stream fileStream = FileUpload1.PostedFile.InputStream)
+                using (BinaryReader reader = new BinaryReader(fileStream))
                 {
-                    using (BinaryReader reader = new BinaryReader(fileStream))
-                    {
-                        imageData = reader.ReadBytes((int)fileStream.Length);
-                    }
+                    imageData = reader.ReadBytes((int)fileStream.Length);
                 }
             }
 
-            PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
-            string result = service.AddEvent(eventId, eventName, ticketPrice, email, date, time, location, description, imageData);
+            var service = new PartnerWebServicesSoapClient();
+            string result = service.AddEvent(eventId, eventName, ticketPrice, email, date, time, location, description, imageData, remainingTickets);
 
             LoadUserEvents(email);
-
             Response.Write("<script>alert('" + result + "');</script>");
         }
 
@@ -99,18 +91,10 @@ namespace WebApplication1
 
         protected void gvEvents_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            try
-            {
-                gvEvents.EditIndex = -1;
-                string email = Session["Email"]?.ToString();
-                LoadUserEvents(email);
-            }
-            catch (Exception ex)
-            {
-                Response.Write($"<script>alert('Error: {ex.Message}');</script>");
-            }
+            gvEvents.EditIndex = -1;
+            string email = Session["Email"]?.ToString();
+            LoadUserEvents(email);
         }
-
 
         protected void gvEvents_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -118,7 +102,6 @@ namespace WebApplication1
             {
                 GridViewRow row = gvEvents.Rows[e.RowIndex];
 
-                // FindControl and null checks
                 TextBox txtEventId = row.FindControl("txtEventId") as TextBox;
                 TextBox txtEventName = row.FindControl("txtEventName") as TextBox;
                 TextBox txtTicketPrice = row.FindControl("txtTicketPrice") as TextBox;
@@ -127,24 +110,12 @@ namespace WebApplication1
                 TextBox txtLocation = row.FindControl("txtLocation") as TextBox;
                 TextBox txtDescription = row.FindControl("txtDescription") as TextBox;
                 FileUpload fileUpload = row.FindControl("fileUpload") as FileUpload;
+                TextBox txtSoldTickets = row.FindControl("txtSoldTickets") as TextBox;
+                TextBox txtRemainingTickets = row.FindControl("txtRemainingTickets") as TextBox;
 
-                // Collect control statuses
-                string missingControls = "";
-                if (txtEventId == null) missingControls += "txtEventId, ";
-                if (txtEventName == null) missingControls += "txtEventName, ";
-                if (txtTicketPrice == null) missingControls += "txtTicketPrice, ";
-                if (txtDate == null) missingControls += "txtDate, ";
-                if (txtTime == null) missingControls += "txtTime, ";
-                if (txtLocation == null) missingControls += "txtLocation, ";
-                if (txtDescription == null) missingControls += "txtDescription, ";
-                if (fileUpload == null) missingControls += "fileUpload, ";
-
-                if (!string.IsNullOrEmpty(missingControls))
+                if (txtEventId == null || txtEventName == null || txtTicketPrice == null || txtDate == null || txtTime == null || txtLocation == null || txtDescription == null || fileUpload == null || txtSoldTickets == null || txtRemainingTickets == null)
                 {
-                    // Remove the last comma and space
-                    missingControls = missingControls.TrimEnd(',', ' ');
-                    // Handle error
-                    throw new Exception("The following controls were not found during the update process: " + missingControls);
+                    throw new Exception("One or more controls were not found.");
                 }
 
                 string eventId = txtEventId.Text;
@@ -159,25 +130,33 @@ namespace WebApplication1
                 if (fileUpload.HasFile)
                 {
                     using (Stream fileStream = fileUpload.PostedFile.InputStream)
+                    using (BinaryReader reader = new BinaryReader(fileStream))
                     {
-                        using (BinaryReader reader = new BinaryReader(fileStream))
-                        {
-                            imageData = reader.ReadBytes((int)fileStream.Length);
-                        }
+                        imageData = reader.ReadBytes((int)fileStream.Length);
                     }
                 }
 
-                DateTime timeValue;
-                if (DateTime.TryParseExact(time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out timeValue))
+                int soldTickets;
+                if (!int.TryParse(txtSoldTickets.Text, out soldTickets))
+                {
+                    throw new Exception("Invalid format for Sold Tickets.");
+                }
+
+                int remainingTickets;
+                if (!int.TryParse(txtRemainingTickets.Text, out remainingTickets))
+                {
+                    throw new Exception("Invalid format for Remaining Tickets.");
+                }
+
+                if (DateTime.TryParseExact(time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime timeValue))
                 {
                     string formattedTime = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
 
-                    PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
-                    string result = service.UpdateEvent(eventId, eventName, ticketPrice, date, formattedTime, location, description, imageData);
+                    var service = new PartnerWebServicesSoapClient();
+                    string result = service.UpdateEvent(eventId, eventName, ticketPrice, date, formattedTime, location, description, imageData, soldTickets, remainingTickets);
 
                     if (!string.IsNullOrEmpty(result))
                     {
-                        // Log result for debugging
                         Response.Write("<script>alert('Update Result: " + result + "');</script>");
                     }
                     else
@@ -191,13 +170,11 @@ namespace WebApplication1
                 }
                 else
                 {
-                    // Handle invalid time format
                     throw new FormatException("Invalid time format.");
                 }
             }
             catch (Exception ex)
             {
-                // Display the error message
                 Response.Write("<script>alert('An error occurred while updating the event: " + ex.Message + "');</script>");
             }
         }
@@ -209,26 +186,21 @@ namespace WebApplication1
             Response.Redirect("~/Login.aspx");
         }
 
-
         protected void btnSearch_Click1(object sender, EventArgs e)
         {
-
+            // Implement search functionality
         }
-
-
 
         protected void DeleteEvent_Click(object sender, EventArgs e)
         {
-
             string eventId = ((LinkButton)sender).CommandArgument;
             DeleteEvent(eventId);
         }
 
         private void DeleteEvent(string eventId)
         {
-            PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
+            var service = new PartnerWebServicesSoapClient();
             string result = service.DeleteEvent(eventId);
-
 
             if (Session["Email"] != null)
             {
@@ -247,30 +219,21 @@ namespace WebApplication1
 
                 if (rowIndex >= 0 && rowIndex < gvEvents.Rows.Count)
                 {
-                    // Get the event ID from the DataKeys collection
                     string eventId = gvEvents.DataKeys[rowIndex]["eventid"].ToString();
-
-                    // Show confirmation dialog before proceeding with delete
                     string confirmScript = $"return confirmDelete('{eventId}');";
                     gvEvents.Attributes["onclick"] = confirmScript;
 
-                    // Cancel the delete operation until confirmation is received
                     e.Cancel = true;
                 }
                 else
                 {
-                    // Handle the case where the RowIndex is out of range
                     throw new ArgumentOutOfRangeException("RowIndex is out of range.");
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception or display an error message
                 Response.Write($"<script>alert('Error: {ex.Message}');</script>");
             }
         }
-
-
-
     }
 }
