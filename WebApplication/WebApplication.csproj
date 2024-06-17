@@ -164,6 +164,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\PartnerServiceReference\PartnerWebServices.wsdl" />
+    <Content Include="Connected Services\PartnerServiceReference\WebApplication1.PartnerServiceReference.AddEventResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\RegistrationServiceReference\RegistrationWebService.disco" />
     <None Include="Connected Services\RegistrationServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\RegistrationServiceReference\configuration.svcinfo" />

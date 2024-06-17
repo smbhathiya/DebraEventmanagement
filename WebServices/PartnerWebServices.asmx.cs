@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -22,14 +23,48 @@ namespace WebServices
         private string connectionString = "Server=localhost;Database=debradb;Uid=root;Pwd=;";
 
         [WebMethod]
-        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location)
+        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData)
         {
             try
             {
+                string imageUrl = "";
+                if (imageData != null && imageData.Length > 0)
+                {
+                    string uploadsFolderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
+
+                    // Create the Uploads folder if it does not exist
+                    if (!Directory.Exists(uploadsFolderPath))
+                    {
+                        try
+                        {
+                            Directory.CreateDirectory(uploadsFolderPath);
+                        }
+                        catch (Exception ex)
+                        {
+                            return "Error creating uploads folder: " + ex.Message;
+                        }
+                    }
+
+                    string imageFileName = eventid + ".jpg";
+                    string imagePath = Path.Combine(uploadsFolderPath, imageFileName);
+
+                    try
+                    {
+                        // Save the image to the Uploads folder
+                        File.WriteAllBytes(imagePath, imageData);
+                        // Set the image URL
+                        imageUrl = "Uploads/" + imageFileName;
+                    }
+                    catch (Exception ex)
+                    {
+                        return "Error saving image: " + ex.Message;
+                    }
+                }
+
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "INSERT INTO events (eventid, event_name, ticket_price, email, date, time, location) VALUES (@EventID, @EventName, @TicketPrice, @Email, @Date, @Time, @Location)";
+                    string query = "INSERT INTO events (eventid, event_name, ticket_price, email, date, time, location, description, imageUrl) VALUES (@EventID, @EventName, @TicketPrice, @Email, @Date, @Time, @Location, @Description, @ImageUrl)";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@EventID", eventid);
                     cmd.Parameters.AddWithValue("@EventName", event_name);
@@ -38,6 +73,8 @@ namespace WebServices
                     cmd.Parameters.AddWithValue("@Date", date);
                     cmd.Parameters.AddWithValue("@Time", time);
                     cmd.Parameters.AddWithValue("@Location", location);
+                    cmd.Parameters.AddWithValue("@Description", description);
+                    cmd.Parameters.AddWithValue("@ImageUrl", imageUrl);
                     cmd.ExecuteNonQuery();
                     return "Event added successfully.";
                 }
@@ -56,16 +93,22 @@ namespace WebServices
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT * FROM events WHERE email = @Email";
+                    string query = "SELECT eventid, event_name, ticket_price, email, date, time, location, description, imageUrl FROM events WHERE email = @Email";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@Email", email);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
 
-                    // Create a DataSet and add DataTable to it
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        string imageUrl = row["imageUrl"].ToString();
+                        string fullImageUrl = "https://localhost:44320/" + imageUrl;
+                        row["imageUrl"] = fullImageUrl;
+                    }
+
                     DataSet ds = new DataSet();
-                    dt.TableName = "Events"; // Set the DataTable name
+                    dt.TableName = "Events";
                     ds.Tables.Add(dt);
 
                     return ds;
@@ -76,6 +119,7 @@ namespace WebServices
                 throw new Exception("An error occurred: " + ex.Message);
             }
         }
+
 
         [WebMethod]
         public string DeleteEvent(string eventid)

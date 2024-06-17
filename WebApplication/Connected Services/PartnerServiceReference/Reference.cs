@@ -16,12 +16,13 @@ namespace WebApplication1.PartnerServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PartnerServiceReference.PartnerWebServicesSoap")]
     public interface PartnerWebServicesSoap {
         
+        // CODEGEN: Parameter 'imageData' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddEvent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location);
+        WebApplication1.PartnerServiceReference.AddEventResponse AddEvent(WebApplication1.PartnerServiceReference.AddEventRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddEvent", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> AddEventAsync(string eventid, string event_name, string ticket_price, string email, string date, string time, string location);
+        System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.AddEventResponse> AddEventAsync(WebApplication1.PartnerServiceReference.AddEventRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetEventsByUserEmail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -43,6 +44,73 @@ namespace WebApplication1.PartnerServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateEvent", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="AddEvent", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class AddEventRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string eventid;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string event_name;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public string ticket_price;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public string email;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public string date;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public string time;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        public string location;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=7)]
+        public string description;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] imageData;
+        
+        public AddEventRequest() {
+        }
+        
+        public AddEventRequest(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData) {
+            this.eventid = eventid;
+            this.event_name = event_name;
+            this.ticket_price = ticket_price;
+            this.email = email;
+            this.date = date;
+            this.time = time;
+            this.location = location;
+            this.description = description;
+            this.imageData = imageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="AddEventResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class AddEventResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string AddEventResult;
+        
+        public AddEventResponse() {
+        }
+        
+        public AddEventResponse(string AddEventResult) {
+            this.AddEventResult = AddEventResult;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -72,12 +140,43 @@ namespace WebApplication1.PartnerServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location) {
-            return base.Channel.AddEvent(eventid, event_name, ticket_price, email, date, time, location);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WebApplication1.PartnerServiceReference.AddEventResponse WebApplication1.PartnerServiceReference.PartnerWebServicesSoap.AddEvent(WebApplication1.PartnerServiceReference.AddEventRequest request) {
+            return base.Channel.AddEvent(request);
         }
         
-        public System.Threading.Tasks.Task<string> AddEventAsync(string eventid, string event_name, string ticket_price, string email, string date, string time, string location) {
-            return base.Channel.AddEventAsync(eventid, event_name, ticket_price, email, date, time, location);
+        public string AddEvent(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData) {
+            WebApplication1.PartnerServiceReference.AddEventRequest inValue = new WebApplication1.PartnerServiceReference.AddEventRequest();
+            inValue.eventid = eventid;
+            inValue.event_name = event_name;
+            inValue.ticket_price = ticket_price;
+            inValue.email = email;
+            inValue.date = date;
+            inValue.time = time;
+            inValue.location = location;
+            inValue.description = description;
+            inValue.imageData = imageData;
+            WebApplication1.PartnerServiceReference.AddEventResponse retVal = ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).AddEvent(inValue);
+            return retVal.AddEventResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.AddEventResponse> WebApplication1.PartnerServiceReference.PartnerWebServicesSoap.AddEventAsync(WebApplication1.PartnerServiceReference.AddEventRequest request) {
+            return base.Channel.AddEventAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.AddEventResponse> AddEventAsync(string eventid, string event_name, string ticket_price, string email, string date, string time, string location, string description, byte[] imageData) {
+            WebApplication1.PartnerServiceReference.AddEventRequest inValue = new WebApplication1.PartnerServiceReference.AddEventRequest();
+            inValue.eventid = eventid;
+            inValue.event_name = event_name;
+            inValue.ticket_price = ticket_price;
+            inValue.email = email;
+            inValue.date = date;
+            inValue.time = time;
+            inValue.location = location;
+            inValue.description = description;
+            inValue.imageData = imageData;
+            return ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).AddEventAsync(inValue);
         }
         
         public System.Data.DataSet GetEventsByUserEmail(string email) {

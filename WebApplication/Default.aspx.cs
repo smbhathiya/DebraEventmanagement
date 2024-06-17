@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.PartnerServiceReference;
@@ -33,16 +34,28 @@ namespace WebApplication1
 
             if (eventsDataSet != null && eventsDataSet.Tables.Count > 0 && eventsDataSet.Tables[0].Rows.Count > 0)
             {
-                gvEvents.DataSource = eventsDataSet.Tables[0];
+                DataTable dt = eventsDataSet.Tables[0];
+
+                dt.Columns.Add("FullImageUrl", typeof(string));
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    string imageUrl = row["imageUrl"].ToString();
+                    string fullImageUrl = "https://localhost:44360/" + imageUrl;
+                    row["FullImageUrl"] = fullImageUrl;
+                }
+
+                gvEvents.DataSource = dt;
                 gvEvents.DataBind();
             }
             else
             {
-                // No events found for the user
                 gvEvents.DataSource = null;
                 gvEvents.DataBind();
             }
         }
+
+
 
         protected void AddEventtodb_Click(object sender, EventArgs e)
         {
@@ -56,15 +69,31 @@ namespace WebApplication1
             string time = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
 
             string location = TextBox6.Text;
+            string description = TextBox7.Text;
+
+            byte[] imageData = null;
+            if (FileUpload1.HasFile)
+            {
+                using (Stream fileStream = FileUpload1.PostedFile.InputStream)
+                {
+                    using (BinaryReader reader = new BinaryReader(fileStream))
+                    {
+                        imageData = reader.ReadBytes((int)fileStream.Length);
+                    }
+                }
+            }
 
             PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
-
-            string result = service.AddEvent(eventId, eventName, ticketPrice, email, date, time, location);
+            string result = service.AddEvent(eventId, eventName, ticketPrice, email, date, time, location, description, imageData);
 
             LoadUserEvents(email);
 
             Response.Write("<script>alert('" + result + "');</script>");
         }
+
+
+
+
 
 
         protected void gvEvents_RowEditing(object sender, GridViewEditEventArgs e)

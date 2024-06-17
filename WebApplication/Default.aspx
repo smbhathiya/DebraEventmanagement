@@ -294,6 +294,25 @@
                             <asp:TextBox ID="txtEventName" runat="server" Text='<%# Bind("event_name") %>' CssClass="form-control"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Description">
+            <ItemTemplate>
+                <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("description") %>'></asp:Label>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtDescription" runat="server" Text='<%# Bind("description") %>' CssClass="form-control"></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
+        
+        <asp:TemplateField HeaderText="Cover Image">
+            <ItemTemplate>
+                <asp:Image ID="imgCover" runat="server" ImageUrl='<%# Eval("imageUrl") %>' Width="100px" Height="100px" />
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:FileUpload ID="fuCoverImage" runat="server" CssClass="form-control-file" />
+            </EditItemTemplate>
+        </asp:TemplateField>
+
                     <asp:TemplateField HeaderText="Ticket Price">
                         <ItemTemplate>
                             <asp:Label ID="lblTicketPrice" runat="server" Text='<%# Eval("ticket_price") %>'></asp:Label>
@@ -346,6 +365,7 @@
 
                 </Columns>
             </asp:GridView>
+
         </div>
     </form>
 
