@@ -38,12 +38,13 @@ namespace WebApplication1.PartnerServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteEvent", ReplyAction="*")]
         System.Threading.Tasks.Task<string> DeleteEventAsync(string eventid);
         
+        // CODEGEN: Parameter 'imageData' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateEvent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location);
+        WebApplication1.PartnerServiceReference.UpdateEventResponse UpdateEvent(WebApplication1.PartnerServiceReference.UpdateEventRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateEvent", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location);
+        System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.UpdateEventResponse> UpdateEventAsync(WebApplication1.PartnerServiceReference.UpdateEventRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -110,6 +111,69 @@ namespace WebApplication1.PartnerServiceReference {
         
         public AddEventResponse(string AddEventResult) {
             this.AddEventResult = AddEventResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateEvent", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class UpdateEventRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string eventId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string event_name;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public string ticket_price;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public string date;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public string time;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public string location;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        public string description;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] imageData;
+        
+        public UpdateEventRequest() {
+        }
+        
+        public UpdateEventRequest(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData) {
+            this.eventId = eventId;
+            this.event_name = event_name;
+            this.ticket_price = ticket_price;
+            this.date = date;
+            this.time = time;
+            this.location = location;
+            this.description = description;
+            this.imageData = imageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateEventResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class UpdateEventResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string UpdateEventResult;
+        
+        public UpdateEventResponse() {
+        }
+        
+        public UpdateEventResponse(string UpdateEventResult) {
+            this.UpdateEventResult = UpdateEventResult;
         }
     }
     
@@ -195,12 +259,41 @@ namespace WebApplication1.PartnerServiceReference {
             return base.Channel.DeleteEventAsync(eventid);
         }
         
-        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location) {
-            return base.Channel.UpdateEvent(eventId, event_name, ticket_price, date, time, location);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WebApplication1.PartnerServiceReference.UpdateEventResponse WebApplication1.PartnerServiceReference.PartnerWebServicesSoap.UpdateEvent(WebApplication1.PartnerServiceReference.UpdateEventRequest request) {
+            return base.Channel.UpdateEvent(request);
         }
         
-        public System.Threading.Tasks.Task<string> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location) {
-            return base.Channel.UpdateEventAsync(eventId, event_name, ticket_price, date, time, location);
+        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData) {
+            WebApplication1.PartnerServiceReference.UpdateEventRequest inValue = new WebApplication1.PartnerServiceReference.UpdateEventRequest();
+            inValue.eventId = eventId;
+            inValue.event_name = event_name;
+            inValue.ticket_price = ticket_price;
+            inValue.date = date;
+            inValue.time = time;
+            inValue.location = location;
+            inValue.description = description;
+            inValue.imageData = imageData;
+            WebApplication1.PartnerServiceReference.UpdateEventResponse retVal = ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).UpdateEvent(inValue);
+            return retVal.UpdateEventResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.UpdateEventResponse> WebApplication1.PartnerServiceReference.PartnerWebServicesSoap.UpdateEventAsync(WebApplication1.PartnerServiceReference.UpdateEventRequest request) {
+            return base.Channel.UpdateEventAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebApplication1.PartnerServiceReference.UpdateEventResponse> UpdateEventAsync(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData) {
+            WebApplication1.PartnerServiceReference.UpdateEventRequest inValue = new WebApplication1.PartnerServiceReference.UpdateEventRequest();
+            inValue.eventId = eventId;
+            inValue.event_name = event_name;
+            inValue.ticket_price = ticket_price;
+            inValue.date = date;
+            inValue.time = time;
+            inValue.location = location;
+            inValue.description = description;
+            inValue.imageData = imageData;
+            return ((WebApplication1.PartnerServiceReference.PartnerWebServicesSoap)(this)).UpdateEventAsync(inValue);
         }
     }
 }

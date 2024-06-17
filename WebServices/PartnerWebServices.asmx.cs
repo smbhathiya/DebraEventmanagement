@@ -32,7 +32,6 @@ namespace WebServices
                 {
                     string uploadsFolderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
 
-                    // Create the Uploads folder if it does not exist
                     if (!Directory.Exists(uploadsFolderPath))
                     {
                         try
@@ -50,9 +49,7 @@ namespace WebServices
 
                     try
                     {
-                        // Save the image to the Uploads folder
                         File.WriteAllBytes(imagePath, imageData);
-                        // Set the image URL
                         imageUrl = "Uploads/" + imageFileName;
                     }
                     catch (Exception ex)
@@ -145,12 +142,24 @@ namespace WebServices
 
 
         [WebMethod]
-        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location)
+        public string UpdateEvent(string eventId, string event_name, string ticket_price, string date, string time, string location, string description, byte[] imageData)
         {
-            string query = "UPDATE Events SET event_name = @EventName, ticket_price = @TicketPrice, Date = @Date, Time = @Time, Location = @Location WHERE EventID = @EventID";
+            string query = "UPDATE Events SET event_name = @EventName, ticket_price = @TicketPrice, Date = @Date, Time = @Time, Location = @Location, Description = @Description, ImageUrl = @ImageUrl WHERE EventID = @EventID";
 
             try
             {
+                string imageUrl = "";
+                if (imageData != null && imageData.Length > 0)
+                {
+                    // Save the image and get the image URL
+                    imageUrl = SaveImage(eventId, imageData);
+                    if (imageUrl.StartsWith("Error"))
+                    {
+                        // Return error message if image saving failed
+                        return imageUrl;
+                    }
+                }
+
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
@@ -160,6 +169,8 @@ namespace WebServices
                     command.Parameters.AddWithValue("@Date", date);
                     command.Parameters.AddWithValue("@Time", time);
                     command.Parameters.AddWithValue("@Location", location);
+                    command.Parameters.AddWithValue("@Description", description);
+                    command.Parameters.AddWithValue("@ImageUrl", imageUrl);
 
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
@@ -180,8 +191,32 @@ namespace WebServices
             }
         }
 
+        private string SaveImage(string eventId, byte[] imageData)
+        {
+            try
+            {
+                string uploadsFolderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
+
+                if (!Directory.Exists(uploadsFolderPath))
+                {
+                    Directory.CreateDirectory(uploadsFolderPath);
+                }
+
+                string imageFileName = eventId + ".jpg";
+                string imagePath = Path.Combine(uploadsFolderPath, imageFileName);
+
+                File.WriteAllBytes(imagePath, imageData);
+                return "Uploads/" + imageFileName;
+            }
+            catch (Exception ex)
+            {
+                return "Error saving image: " + ex.Message;
+            }
+        }
+
+
     }
-    }
+}
 
 
 

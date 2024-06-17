@@ -304,12 +304,12 @@
             </EditItemTemplate>
         </asp:TemplateField>
         
-        <asp:TemplateField HeaderText="Cover Image">
+  <asp:TemplateField HeaderText="Cover Image">
             <ItemTemplate>
                 <asp:Image ID="imgCover" runat="server" ImageUrl='<%# Eval("imageUrl") %>' Width="100px" Height="100px" />
             </ItemTemplate>
             <EditItemTemplate>
-                <asp:FileUpload ID="fuCoverImage" runat="server" CssClass="form-control-file" />
+                <asp:FileUpload ID="fileUpload" runat="server" CssClass="form-control-file" />
             </EditItemTemplate>
         </asp:TemplateField>
 

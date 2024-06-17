@@ -131,6 +131,8 @@ namespace WebApplication1
                 TextBox txtDate = row.FindControl("txtDate") as TextBox;
                 TextBox txtTime = row.FindControl("txtTime") as TextBox;
                 TextBox txtLocation = row.FindControl("txtLocation") as TextBox;
+                TextBox txtDescription = row.FindControl("txtDescription") as TextBox;
+                FileUpload fileUpload = row.FindControl("fileUpload") as FileUpload;
 
                 // Collect control statuses
                 string missingControls = "";
@@ -140,6 +142,8 @@ namespace WebApplication1
                 if (txtDate == null) missingControls += "txtDate, ";
                 if (txtTime == null) missingControls += "txtTime, ";
                 if (txtLocation == null) missingControls += "txtLocation, ";
+                if (txtDescription == null) missingControls += "txtDescription, ";
+                if (fileUpload == null) missingControls += "fileUpload, ";
 
                 if (!string.IsNullOrEmpty(missingControls))
                 {
@@ -155,6 +159,19 @@ namespace WebApplication1
                 string date = txtDate.Text;
                 string time = txtTime.Text;
                 string location = txtLocation.Text;
+                string description = txtDescription.Text;
+                byte[] imageData = null;
+
+                if (fileUpload.HasFile)
+                {
+                    using (Stream fileStream = fileUpload.PostedFile.InputStream)
+                    {
+                        using (BinaryReader reader = new BinaryReader(fileStream))
+                        {
+                            imageData = reader.ReadBytes((int)fileStream.Length);
+                        }
+                    }
+                }
 
                 DateTime timeValue;
                 if (DateTime.TryParseExact(time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out timeValue))
@@ -162,7 +179,7 @@ namespace WebApplication1
                     string formattedTime = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
 
                     PartnerWebServicesSoapClient service = new PartnerWebServicesSoapClient();
-                    string result = service.UpdateEvent(eventId, eventName, ticketPrice, date, formattedTime, location);
+                    string result = service.UpdateEvent(eventId, eventName, ticketPrice, date, formattedTime, location, description, imageData);
 
                     if (!string.IsNullOrEmpty(result))
                     {
@@ -190,6 +207,7 @@ namespace WebApplication1
                 Response.Write("<script>alert('An error occurred while updating the event: " + ex.Message + "');</script>");
             }
         }
+
 
 
 
