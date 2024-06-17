@@ -56,7 +56,6 @@ namespace WebApplication1
         }
 
 
-
         protected void AddEventtodb_Click(object sender, EventArgs e)
         {
             string eventId = eventidtxtbox.Text;
@@ -90,11 +89,6 @@ namespace WebApplication1
 
             Response.Write("<script>alert('" + result + "');</script>");
         }
-
-
-
-
-
 
         protected void gvEvents_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -208,14 +202,6 @@ namespace WebApplication1
             }
         }
 
-
-
-
-
-        protected void btnSearch_Click1(object sender, EventArgs e)
-        {
-        }
-
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
@@ -224,7 +210,10 @@ namespace WebApplication1
         }
 
 
+        protected void btnSearch_Click1(object sender, EventArgs e)
+        {
 
+        }
 
 
 

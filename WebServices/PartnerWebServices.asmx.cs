@@ -126,10 +126,29 @@ namespace WebServices
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "DELETE FROM events WHERE eventid = @EventID";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@EventID", eventid);
-                    cmd.ExecuteNonQuery();
+
+                    // Get the image URL of the event to be deleted
+                    string getImageUrlQuery = "SELECT imageUrl FROM events WHERE eventid = @EventID";
+                    MySqlCommand getImageUrlCmd = new MySqlCommand(getImageUrlQuery, connection);
+                    getImageUrlCmd.Parameters.AddWithValue("@EventID", eventid);
+                    string imageUrl = getImageUrlCmd.ExecuteScalar()?.ToString();
+
+                    // Delete the event record from the database
+                    string deleteEventQuery = "DELETE FROM events WHERE eventid = @EventID";
+                    MySqlCommand deleteEventCmd = new MySqlCommand(deleteEventQuery, connection);
+                    deleteEventCmd.Parameters.AddWithValue("@EventID", eventid);
+                    deleteEventCmd.ExecuteNonQuery();
+
+                    // Delete the associated image from the file system
+                    if (!string.IsNullOrEmpty(imageUrl))
+                    {
+                        string imagePath = HttpContext.Current.Server.MapPath("~/" + imageUrl);
+                        if (File.Exists(imagePath))
+                        {
+                            File.Delete(imagePath);
+                        }
+                    }
+
                     return "Event deleted successfully.";
                 }
             }
@@ -138,6 +157,7 @@ namespace WebServices
                 return "An error occurred: " + ex.Message;
             }
         }
+
 
 
 
