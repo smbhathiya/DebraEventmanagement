@@ -24,6 +24,16 @@
                 font-weight: 700;
             }
 
+        .page-title{
+            text-align:center;
+            color: #000;
+            padding:10px;
+
+        }
+        .page-title h3{
+             font-size:28px;
+             font-weight:800;
+        }
         .container {
             margin-top: 20px;
         }
@@ -189,6 +199,9 @@
     <div class="top-bar">
         <h1>DEBRA</h1>
         <h6>Event Management Company</h6>
+    </div>
+    <div class="page-title">
+        <h3>DASHBOARD</h3>
     </div>
 
     <form id="form1" runat="server">
