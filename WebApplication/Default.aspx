@@ -92,7 +92,7 @@
         .table td {
             padding: 0.75rem;
             vertical-align: top;
-            border-top: 1px solid #dee2e6;
+            border-top: 1px solid #d6d6d6;
         }
 
         .table thead th {
