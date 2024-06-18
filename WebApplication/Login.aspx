@@ -43,7 +43,7 @@
             border-color: #007bff;
         }
         .btn-login {
-            background-color: #000;
+            background-color: #212529;
             border: none;
             border-radius: 20px;
             color: #fff;

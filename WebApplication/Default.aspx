@@ -13,33 +13,127 @@
         }
 
         .top-bar {
-            background-color: #000;
+            background-color: #212529;
             font-size: 40px;
             color: #fff;
-            text-align: left;
-            padding: 20px 10px 10px 20px;
+            padding: 20px;
         }
 
             .top-bar h1 {
                 font-weight: 700;
+                margin: 0;
             }
 
-        .page-title{
-            text-align:center;
-            color: #000;
-            padding:10px;
+            .top-bar h6 {
+                margin: 0;
+                font-size: 18px;
+            }
 
-        }
         .page-title h3{
-             font-size:28px;
-             font-weight:800;
+            text-align: center;
+            color: #212529;
+            padding: 15px;
+            font-weight:bold;
         }
+
+        .navbar {
+            margin-top: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-size: 18px;
+            padding: 10px 15px;
+        }
+
+            .navbar-nav .nav-link.active {
+                font-weight: bold;
+            }
+
+            .navbar-nav .nav-link:hover {
+                color: #fddc5c;
+                text-decoration: underline;
+            }
+
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-toggler-icon {
+            color: #212529;
+        }
+
+        .logout-btn {
+            color: #fff;
+            background-color: #212529;
+            border: 1px solid #fff;
+            padding: 5px 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+            .logout-btn:hover {
+                background-color: #fff;
+                color: #212529;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+
+            .table th,
+            .table td {
+                border: 1px solid #ddd;
+            }
+
+
+        .table-container {
+            margin: 20px;
+        }
+
+        .table th {
+            background-color: #212529;
+            color: #fff;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .table .table {
+            background-color: #fff;
+        }
+
         .container {
             margin-top: 20px;
         }
 
         .btn-custom {
-            background-color: #000;
+            background-color: #212529;
             color: #fff;
             border-radius: 15px;
             transition: background-color 0.3s ease;
@@ -77,36 +171,7 @@
                 border-color: #007bff;
             }
 
-        .table {
-            width: 100%;
-            max-width: 100%;
-            margin-bottom: 1rem;
-            background-color: transparent;
-        }
 
-        .table-container {
-            margin: 20px;
-        }
-
-        .table th,
-        .table td {
-            padding: 0.75rem;
-            vertical-align: top;
-            border-top: 1px solid #d6d6d6;
-        }
-
-        .table thead th {
-            vertical-align: bottom;
-            border-bottom: 2px solid #dee2e6;
-        }
-
-        .table tbody + tbody {
-            border-top: 2px solid #dee2e6;
-        }
-
-        .table .table {
-            background-color: #fff;
-        }
 
         .upload-label,
         .description-label {
@@ -134,7 +199,7 @@
 
         .file-upload-btn {
             cursor: pointer;
-            background-color: #000;
+            background-color: #212529;
             color: #fff;
             border-radius: 10px;
             padding: 8px;
@@ -145,6 +210,7 @@
             display: inline-block;
             margin-left: 10px;
             font-weight: bold;
+            color: #212529;
         }
 
         /* You may need to adjust the styles based on your preference */
@@ -206,19 +272,18 @@
 
     <form id="form1" runat="server">
         <div class="container">
-            <div class="form-row align-items-center mb-3">
-                <div class="col">
-                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Enter Event ID or Name"></asp:TextBox>
-                </div>
-                <div class="col-auto">
+            <div class="container d-flex justify-content-center">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Enter Event ID or Name"></asp:TextBox>
+                    </div>
+                    <div class="col-auto">
                     <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-custom" OnClientClick="showSection('searchEventSection'); return false;" OnClick="btnSearch_Click1" />
                 </div>
                 <div class="col-auto">
                     <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" CssClass="btn btn-custom" OnClientClick="showSection('addEventSection'); return false;" />
                 </div>
-                <div class="col-auto">
-                    <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-custom" OnClick="btnLogout_Click" />
-                </div>
+            </div>
             </div>
             <div id="searchEventSection" class="section">
                 <!-- Search event results will be displayed here -->
@@ -286,7 +351,7 @@
 
 
                 </div>
-                <asp:Button ID="Button4" runat="server" Text="Add Event" CssClass="btn btn-custom" OnClick="AddEventtodb_Click" />
+                <asp:Button ID="Button4" runat="server" Text="Add Event" CssClass="btn btn-custom col-md-2" OnClick="AddEventtodb_Click" Style="margin-bottom:30px;padding:10px;"/>
             </div>
 
         </div>
@@ -377,7 +442,7 @@
                         </EditItemTemplate>
                     </asp:TemplateField>
 
-   
+
 
                     <asp:TemplateField HeaderText="Location">
                         <ItemTemplate>
@@ -391,15 +456,15 @@
 
                     <asp:TemplateField ShowHeader="False">
                         <ItemTemplate>
-                            <asp:Panel ID="pnlItemTemplate" runat="server" Style="width: 200px;">
+                            <asp:Panel ID="pnlItemTemplate" runat="server">
                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn-primary btn-sm btn-block" Style="padding: 8px;" />
                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument='<%# Eval("eventid") %>' Text="Delete" CssClass="btn btn-danger btn-sm btn-block" OnClick="DeleteEvent_Click" OnClientClick="return confirm('Are you sure you want to delete this event?');" Style="padding: 8px;" />
                             </asp:Panel>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:Panel ID="Panel1" runat="server" Style="width: 200px;">
-                                <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-sm btn-block" Style="padding: 8px;" />
-                                <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm btn-block" Style="padding: 8px;" />
+                            <asp:Panel ID="Panel1" runat="server">
+                                <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-sm btn-block" Style="padding: 8px;width:100px" />
+                                <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm btn-block" Style="padding: 8px;width:100px" />
                             </asp:Panel>
                         </EditItemTemplate>
                     </asp:TemplateField>

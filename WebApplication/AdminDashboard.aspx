@@ -13,7 +13,7 @@
         }
 
         .top-bar {
-            background-color: #000;
+            background-color: #212529;
             font-size: 40px;
             color: #fff;
             padding: 20px;
@@ -54,12 +54,12 @@
         }
 
         .navbar-toggler-icon {
-            color: #000;
+            color: #212529;
         }
 
-        .logout-btn{
+        .logout-btn {
             color: #fff;
-            background-color: #000;
+            background-color: #212529;
             border: 1px solid #fff;
             padding: 5px 10px;
             font-size: 18px;
@@ -69,27 +69,27 @@
 
             .logout-btn:hover {
                 background-color: #fff;
-                color: #000;
+                color: #212529;
                 font-weight: bold;
                 text-decoration: none;
             }
 
-.table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 10px;
-    overflow: hidden;
-}
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
 
-.table th,
-.table td {
-    border: 1px solid #ddd; 
-}
+            .table th,
+            .table td {
+                border: 1px solid #ddd;
+            }
 
 
         .table-container {
@@ -97,7 +97,7 @@
         }
 
         .table th {
-            background-color: #000;
+            background-color: #212529;
             color: #fff;
         }
 
@@ -126,7 +126,7 @@
         }
 
         .btn-custom {
-            background-color: #000;
+            background-color: #212529;
             color: #fff;
             border-radius: 15px;
             transition: background-color 0.3s ease;
@@ -151,7 +151,6 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 border-color: #007bff;
             }
-
     </style>
 </head>
 <body>
@@ -198,7 +197,7 @@
                     <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Enter Event Name"></asp:TextBox>
                 </div>
                 <div class="col-4">
-                    <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" CssClass="btn btn-custom" />
+                    <asp:Button ID="btnAddEvent" runat="server" Text="Search Event" CssClass="btn btn-custom" />
                 </div>
             </div>
         </div>
@@ -264,8 +263,8 @@
                             <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn-primary btn-sm"></asp:LinkButton>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-sm"></asp:LinkButton>
-                            <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm"></asp:LinkButton>
+                            <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-sm" Style="margin: 2px;"></asp:LinkButton>
+                            <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm" Style="margin: 2px;"></asp:LinkButton>
                         </EditItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField>

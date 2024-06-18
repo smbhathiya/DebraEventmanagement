@@ -12,7 +12,7 @@
             color: #000;
         }
         .top-bar {
-            background-color: #000;
+            background-color: #212529;
             font-size:40px;
             color: #fff;
             text-align: left;
@@ -26,7 +26,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 80vh;
         }
         .register-form {
             border-radius: 15px;
@@ -53,7 +52,7 @@
             border-color: #007bff;
         }
         .btn-register {
-            background-color: #000;
+            background-color: #212529;
             border: none;
             border-radius: 15px;
             color: #fff;
@@ -82,7 +81,7 @@
         }
         .switch-container button {
             background-color: #fff;
-            border: 1px solid #000;
+            border: 1px solid #212529;
             border-radius:15px;
             color: #000;
             cursor: pointer;
@@ -93,7 +92,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         .switch-container button.active {
-            background-color: #000;
+            background-color: #212529;
             color: #fff;
             border-radius:15px;
         }
