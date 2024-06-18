@@ -34,6 +34,10 @@ namespace WebApplication1
                     {
                         Response.Redirect("Default.aspx");
                     }
+                    else if (userType == "admin")
+                    {
+                        Response.Redirect("AdminDashboard.aspx");
+                    }
 
                 }
                 else

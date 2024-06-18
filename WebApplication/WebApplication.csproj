@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <None Include="Connected Services\AdminServiceReference\AdminWebServices.wsdl" />
     <None Include="Connected Services\LoginServiceReference\LoginWebService.disco" />
     <None Include="Connected Services\LoginServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\LoginServiceReference\configuration.svcinfo" />
@@ -164,6 +165,14 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\PartnerServiceReference\PartnerWebServices.wsdl" />
+    <Content Include="AdminDashboard.aspx" />
+    <None Include="Connected Services\AdminServiceReference\AdminWebServices.disco" />
+    <None Include="Connected Services\AdminServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\AdminServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\AdminServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Connected Services\PartnerServiceReference\WebApplication1.PartnerServiceReference.AddEventResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -283,6 +292,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboard.aspx.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard.aspx.designer.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -292,6 +308,11 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\AdminServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LoginServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -386,6 +407,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\AdminServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\LoginServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\PartnerServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\RegistrationServiceReference\" />
