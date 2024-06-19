@@ -29,11 +29,11 @@
                 font-size: 18px;
             }
 
-        .page-title h3{
+        .page-title h3 {
             text-align: center;
             color: #212529;
             padding: 15px;
-            font-weight:bold;
+            font-weight: bold;
         }
 
         .navbar {
@@ -213,7 +213,22 @@
             color: #212529;
         }
 
-        /* You may need to adjust the styles based on your preference */
+        .footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .footer a {
+                color: #fddc5c;
+                text-decoration: none;
+            }
+
+                .footer a:hover {
+                    text-decoration: underline;
+                }
     </style>
     <script type="text/javascript">
         function updateFileName() {
@@ -262,15 +277,45 @@
 
 </head>
 <body>
-    <div class="top-bar">
-        <h1>DEBRA</h1>
-        <h6>Event Management Company</h6>
-    </div>
-    <div class="page-title">
-        <h3>DASHBOARD</h3>
-    </div>
-
     <form id="form1" runat="server">
+
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>DEBRA</h1>
+                        <h6>Event Management Company</h6>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                        <nav class="navbar navbar-expand-lg navbar-dark">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="AdminDashboard.aspx">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="About.aspx">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="ContactUs.aspx">Contact Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="action">Profile</a>
+                                    </li>
+
+                                </ul>
+                                <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="logout-btn ml-3" />
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="container">
             <div class="container d-flex justify-content-center">
                 <div class="row mb-3">
@@ -278,12 +323,12 @@
                         <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Enter Event ID or Name"></asp:TextBox>
                     </div>
                     <div class="col-auto">
-                    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-custom" OnClientClick="showSection('searchEventSection'); return false;" OnClick="btnSearch_Click1" />
+                        <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-custom" OnClientClick="showSection('searchEventSection'); return false;" OnClick="btnSearch_Click1" />
+                    </div>
+                    <div class="col-auto">
+                        <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" CssClass="btn btn-custom" OnClientClick="showSection('addEventSection'); return false;" />
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" CssClass="btn btn-custom" OnClientClick="showSection('addEventSection'); return false;" />
-                </div>
-            </div>
             </div>
             <div id="searchEventSection" class="section">
                 <!-- Search event results will be displayed here -->
@@ -351,7 +396,7 @@
 
 
                 </div>
-                <asp:Button ID="Button4" runat="server" Text="Add Event" CssClass="btn btn-custom col-md-2" OnClick="AddEventtodb_Click" Style="margin-bottom:30px;padding:10px;"/>
+                <asp:Button ID="Button4" runat="server" Text="Add Event" CssClass="btn btn-custom col-md-2" OnClick="AddEventtodb_Click" Style="margin-bottom: 30px; padding: 10px;" />
             </div>
 
         </div>
@@ -390,7 +435,7 @@
 
                     <asp:TemplateField HeaderText="Cover Image">
                         <ItemTemplate>
-                            <asp:Image ID="imgCover" runat="server" ImageUrl='<%# Eval("imageUrl") %>' Width="100px" Height="100px" />
+                            <asp:Image ID="imgCover" runat="server" ImageUrl='<%# Eval("imageUrl") %>' Width="66px" Height="100px" />
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:FileUpload ID="fileUpload" runat="server" CssClass="form-control-file" />
@@ -463,8 +508,8 @@
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:Panel ID="Panel1" runat="server">
-                                <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-sm btn-block" Style="padding: 8px;width:100px" />
-                                <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm btn-block" Style="padding: 8px;width:100px" />
+                                <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-sm btn-block" Style="padding: 8px; width: 100px" />
+                                <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm btn-block" Style="padding: 8px; width: 100px" />
                             </asp:Panel>
                         </EditItemTemplate>
                     </asp:TemplateField>
@@ -473,6 +518,21 @@
                 </Columns>
             </asp:GridView>
 
+        </div>
+
+        <div class="footer">
+            <div class="container">
+                <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
+                <p>
+                    Follow us on 
+                   
+                    <a href="#">Facebook</a>, 
+                   
+                    <a href="#">Twitter</a>, 
+                   
+                    <a href="#">Instagram</a>
+                </p>
+            </div>
         </div>
     </form>
 

@@ -151,6 +151,22 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 border-color: #007bff;
             }
+            .footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #fddc5c;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -274,6 +290,17 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+        </div>
+
+                        <div class="footer">
+            <div class="container">
+                <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
+                <p>Follow us on 
+                    <a href="#">Facebook</a>, 
+                    <a href="#">Twitter</a>, 
+                    <a href="#">Instagram</a>
+                </p>
+            </div>
         </div>
     </form>
 
