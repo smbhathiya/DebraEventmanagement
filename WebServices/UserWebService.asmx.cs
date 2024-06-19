@@ -59,5 +59,39 @@ namespace WebServices
             }
         }
 
+        [WebMethod]
+        public DataSet GetUserPurchasedTickets(string userEmail)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = @"
+                        SELECT e.event_name, e.location, e.time, s.tickets_purchased, e.ticket_price, s.total_price
+                        FROM sales s
+                        JOIN events e ON s.eventid = e.eventid
+                        WHERE s.user_email = @UserEmail";
+
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@UserEmail", userEmail);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    DataSet ds = new DataSet();
+                    dt.TableName = "PurchasedTickets";
+                    ds.Tables.Add(dt);
+
+                    return ds;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred: " + ex.Message);
+            }
+        }
     }
+
+
 }
