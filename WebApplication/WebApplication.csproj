@@ -163,6 +163,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="BuyTickets.aspx" />
     <Content Include="img.jpg" />
     <None Include="Connected Services\AdminServiceReference\AdminWebServices.wsdl" />
     <None Include="Connected Services\LoginServiceReference\LoginWebService.disco" />
@@ -317,6 +318,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BuyTickets.aspx.cs">
+      <DependentUpon>BuyTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuyTickets.aspx.designer.cs">
+      <DependentUpon>BuyTickets.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\AdminServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

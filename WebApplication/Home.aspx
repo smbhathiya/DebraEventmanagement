@@ -6,6 +6,8 @@
 <head runat="server">
     <title>Home</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
     <style>
         body {
             background-color: #fff;
@@ -123,7 +125,6 @@
             color: #fff;
             padding: 20px 0;
             text-align: center;
-            margin-top: 20px;
         }
 
             .footer a {
@@ -134,7 +135,33 @@
                 .footer a:hover {
                     text-decoration: underline;
                 }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 1000;
+        }
+
+            #back-to-top a {
+                display: block;
+                width: 50px;
+                height: 50px;
+                background-color: #212529;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 50px;
+                color: #fff;
+                font-size: 24px;
+                text-decoration: none;
+            }
+
+                #back-to-top a:hover {
+                    background-color: #000;
+                    color: #fff;
+                }
     </style>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -177,7 +204,7 @@
         </div>
 
         <div class="container mt-4">
-            <asp:Repeater ID="EventRepeater" runat="server">
+            <asp:Repeater ID="EventRepeater" runat="server"  OnItemCommand="EventRepeater_ItemCommand">
                 <ItemTemplate>
                     <div class="event-card">
                         <div class="event-image-container">
@@ -190,17 +217,18 @@
                             <p>Location: <span class="important"><%# Eval("location") %></span></p>
                             <p>Ticket Price: <span class="important"><%# Eval("ticket_price","Rs. {0:N}") %></span></p>
                             <p>Organized by: <span class="important"><%# Eval("company_name") %></span></p>
-                            <asp:Button ID="BuyTicketsButton" runat="server" Text="Buy Tickets" CssClass="btn btn-primary mt-4" />
+                            <asp:Button ID="BuyTicketsButton" runat="server" Text="Buy Tickets" CssClass="btn btn-primary mt-4" CommandArgument='<%# Eval("eventid") %>' CommandName="BuyTickets" />
                         </div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
 
-                <div class="footer">
+        <div class="footer">
             <div class="container">
                 <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
-                <p>Follow us on 
+                <p>
+                    Follow us on 
                     <a href="#">Facebook</a>, 
                     <a href="#">Twitter</a>, 
                     <a href="#">Instagram</a>
@@ -209,6 +237,29 @@
         </div>
 
     </form>
+
+    <div id="back-to-top" class="back-to-top">
+        <a href="#top">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+        <script>
+
+            window.onscroll = function () {
+                const backToTopButton = document.getElementById('back-to-top');
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            };
+
+            document.getElementById('back-to-top').addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        </script>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

@@ -39,7 +39,7 @@ namespace WebApplication1
         {
             try
             {
-                UserWebServiceSoapClient service = new UserWebServiceSoapClient(); 
+                UserWebServiceSoapClient service = new UserWebServiceSoapClient();
                 DataSet ds = service.ViewAllEvents();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -52,6 +52,15 @@ namespace WebApplication1
                 Response.Write("An error occurred: " + ex.Message);
             }
         }
+        protected void EventRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "BuyTickets")
+            {
+                string eventId = e.CommandArgument.ToString();
+                string userEmail = Session["Email"].ToString();
+                Response.Redirect($"BuyTickets.aspx?eventId={eventId}");
+            }
 
+        }
     }
 }
