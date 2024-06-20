@@ -29,6 +29,49 @@ namespace WebApplication1.UserWebServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserPurchasedTickets", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> GetUserPurchasedTicketsAsync(string userEmail);
+        
+        // CODEGEN: Parameter 'GeneratePdfResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GeneratePdf", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        WebApplication1.UserWebServiceReference.GeneratePdfResponse GeneratePdf(WebApplication1.UserWebServiceReference.GeneratePdfRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GeneratePdf", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebApplication1.UserWebServiceReference.GeneratePdfResponse> GeneratePdfAsync(WebApplication1.UserWebServiceReference.GeneratePdfRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GeneratePdf", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GeneratePdfRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string salesId;
+        
+        public GeneratePdfRequest() {
+        }
+        
+        public GeneratePdfRequest(string salesId) {
+            this.salesId = salesId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GeneratePdfResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GeneratePdfResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] GeneratePdfResult;
+        
+        public GeneratePdfResponse() {
+        }
+        
+        public GeneratePdfResponse(byte[] GeneratePdfResult) {
+            this.GeneratePdfResult = GeneratePdfResult;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -72,6 +115,29 @@ namespace WebApplication1.UserWebServiceReference {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> GetUserPurchasedTicketsAsync(string userEmail) {
             return base.Channel.GetUserPurchasedTicketsAsync(userEmail);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WebApplication1.UserWebServiceReference.GeneratePdfResponse WebApplication1.UserWebServiceReference.UserWebServiceSoap.GeneratePdf(WebApplication1.UserWebServiceReference.GeneratePdfRequest request) {
+            return base.Channel.GeneratePdf(request);
+        }
+        
+        public byte[] GeneratePdf(string salesId) {
+            WebApplication1.UserWebServiceReference.GeneratePdfRequest inValue = new WebApplication1.UserWebServiceReference.GeneratePdfRequest();
+            inValue.salesId = salesId;
+            WebApplication1.UserWebServiceReference.GeneratePdfResponse retVal = ((WebApplication1.UserWebServiceReference.UserWebServiceSoap)(this)).GeneratePdf(inValue);
+            return retVal.GeneratePdfResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebApplication1.UserWebServiceReference.GeneratePdfResponse> WebApplication1.UserWebServiceReference.UserWebServiceSoap.GeneratePdfAsync(WebApplication1.UserWebServiceReference.GeneratePdfRequest request) {
+            return base.Channel.GeneratePdfAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebApplication1.UserWebServiceReference.GeneratePdfResponse> GeneratePdfAsync(string salesId) {
+            WebApplication1.UserWebServiceReference.GeneratePdfRequest inValue = new WebApplication1.UserWebServiceReference.GeneratePdfRequest();
+            inValue.salesId = salesId;
+            return ((WebApplication1.UserWebServiceReference.UserWebServiceSoap)(this)).GeneratePdfAsync(inValue);
         }
     }
 }

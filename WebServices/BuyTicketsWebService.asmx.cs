@@ -105,11 +105,14 @@ namespace WebServices
                 MySqlTransaction transaction = connection.BeginTransaction();
                 try
                 {
+                    string salesId = GenerateSalesId();
+
                     string insertSaleQuery = @"
-                        INSERT INTO sales (eventid, user_email, tickets_purchased, total_price)
-                        VALUES (@EventId, @UserEmail, @TicketCount, @TotalPrice)";
+                INSERT INTO sales (salesid, eventid, user_email, tickets_purchased, total_price)
+                VALUES (@SalesId, @EventId, @UserEmail, @TicketCount, @TotalPrice)";
 
                     MySqlCommand insertCmd = new MySqlCommand(insertSaleQuery, connection, transaction);
+                    insertCmd.Parameters.AddWithValue("@SalesId", salesId);
                     insertCmd.Parameters.AddWithValue("@EventId", eventId);
                     insertCmd.Parameters.AddWithValue("@UserEmail", userEmail);
                     insertCmd.Parameters.AddWithValue("@TicketCount", ticketCount);
@@ -117,10 +120,10 @@ namespace WebServices
                     insertCmd.ExecuteNonQuery();
 
                     string updateEventQuery = @"
-                        UPDATE events 
-                        SET soldTickets = soldTickets + @TicketCount, 
-                            remainingTickets = remainingTickets - @TicketCount
-                        WHERE eventid = @EventId";
+                UPDATE events 
+                SET soldTickets = soldTickets + @TicketCount, 
+                    remainingTickets = remainingTickets - @TicketCount
+                WHERE eventid = @EventId";
 
                     MySqlCommand updateCmd = new MySqlCommand(updateEventQuery, connection, transaction);
                     updateCmd.Parameters.AddWithValue("@TicketCount", ticketCount);
@@ -136,7 +139,16 @@ namespace WebServices
                     throw new Exception("An error occurred during the purchase: " + ex.Message);
                 }
             }
-
         }
+
+        private string GenerateSalesId()
+        {
+            string year = DateTime.Now.Year.ToString();
+            string date = DateTime.Now.ToString("MMdd");
+            string time = DateTime.Now.ToString("HHmmss");
+
+            return "S" + year + date + time;
+        }
+
     }
 }

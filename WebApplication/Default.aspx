@@ -229,6 +229,20 @@
                 .footer a:hover {
                     text-decoration: underline;
                 }
+                        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+        }
     </style>
     <script type="text/javascript">
         function updateFileName() {
@@ -278,7 +292,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
+                <div class="wrapper">
+            <div class="content">
         <div class="top-bar">
             <div class="container-fluid">
                 <div class="row">
@@ -520,18 +535,17 @@
 
         </div>
 
-        <div class="footer">
-            <div class="container">
-                <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
-                <p>
-                    Follow us on 
-                   
+            </div>
+            <div class="footer">
+                <div class="container">
+                    <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
+                    <p>
+                        Follow us on 
                     <a href="#">Facebook</a>, 
-                   
                     <a href="#">Twitter</a>, 
-                   
                     <a href="#">Instagram</a>
-                </p>
+                    </p>
+                </div>
             </div>
         </div>
     </form>
