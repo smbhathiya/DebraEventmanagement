@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <None Include="Connected Services\BuyTicketsServiceReference\BuyTicketsWebService.wsdl" />
     <None Include="Connected Services\UserWebServiceReference\UserWebService.disco" />
     <None Include="Connected Services\UserWebServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\UserWebServiceReference\configuration.svcinfo" />
@@ -164,6 +165,13 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="BuyTickets.aspx" />
+    <None Include="Connected Services\BuyTicketsServiceReference\BuyTicketsWebService.disco" />
+    <None Include="Connected Services\BuyTicketsServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\BuyTicketsServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\BuyTicketsServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="img.jpg" />
     <None Include="Connected Services\AdminServiceReference\AdminWebServices.wsdl" />
     <None Include="Connected Services\LoginServiceReference\LoginWebService.disco" />
@@ -330,6 +338,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\BuyTicketsServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LoginServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -430,6 +443,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AdminServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\BuyTicketsServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\LoginServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\PartnerServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\RegistrationServiceReference\" />

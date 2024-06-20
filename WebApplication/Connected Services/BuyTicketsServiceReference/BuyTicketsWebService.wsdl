@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ViewEvent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewEventResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ViewEventResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculateTotalPrice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ticketCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculateTotalPriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CalculateTotalPriceResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PurchaseTickets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ticketCount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="userEmail" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="totalPrice" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PurchaseTicketsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PurchaseTicketsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ViewEventSoapIn">
+    <wsdl:part name="parameters" element="tns:ViewEvent" />
+  </wsdl:message>
+  <wsdl:message name="ViewEventSoapOut">
+    <wsdl:part name="parameters" element="tns:ViewEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="CalculateTotalPriceSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateTotalPrice" />
+  </wsdl:message>
+  <wsdl:message name="CalculateTotalPriceSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateTotalPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseTicketsSoapIn">
+    <wsdl:part name="parameters" element="tns:PurchaseTickets" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseTicketsSoapOut">
+    <wsdl:part name="parameters" element="tns:PurchaseTicketsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BuyTicketsWebServiceSoap">
+    <wsdl:operation name="ViewEvent">
+      <wsdl:input message="tns:ViewEventSoapIn" />
+      <wsdl:output message="tns:ViewEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CalculateTotalPrice">
+      <wsdl:input message="tns:CalculateTotalPriceSoapIn" />
+      <wsdl:output message="tns:CalculateTotalPriceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseTickets">
+      <wsdl:input message="tns:PurchaseTicketsSoapIn" />
+      <wsdl:output message="tns:PurchaseTicketsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BuyTicketsWebServiceSoap" type="tns:BuyTicketsWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ViewEvent">
+      <soap:operation soapAction="http://tempuri.org/ViewEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateTotalPrice">
+      <soap:operation soapAction="http://tempuri.org/CalculateTotalPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseTickets">
+      <soap:operation soapAction="http://tempuri.org/PurchaseTickets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BuyTicketsWebServiceSoap12" type="tns:BuyTicketsWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ViewEvent">
+      <soap12:operation soapAction="http://tempuri.org/ViewEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateTotalPrice">
+      <soap12:operation soapAction="http://tempuri.org/CalculateTotalPrice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseTickets">
+      <soap12:operation soapAction="http://tempuri.org/PurchaseTickets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BuyTicketsWebService">
+    <wsdl:port name="BuyTicketsWebServiceSoap" binding="tns:BuyTicketsWebServiceSoap">
+      <soap:address location="https://localhost:44320/BuyTicketsWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BuyTicketsWebServiceSoap12" binding="tns:BuyTicketsWebServiceSoap12">
+      <soap12:address location="https://localhost:44320/BuyTicketsWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

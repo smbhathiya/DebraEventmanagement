@@ -22,6 +22,13 @@ namespace WebApplication1.UserWebServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ViewAllEvents", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> ViewAllEventsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserPurchasedTickets", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet GetUserPurchasedTickets(string userEmail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserPurchasedTickets", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GetUserPurchasedTicketsAsync(string userEmail);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -57,6 +64,14 @@ namespace WebApplication1.UserWebServiceReference {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> ViewAllEventsAsync() {
             return base.Channel.ViewAllEventsAsync();
+        }
+        
+        public System.Data.DataSet GetUserPurchasedTickets(string userEmail) {
+            return base.Channel.GetUserPurchasedTickets(userEmail);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GetUserPurchasedTicketsAsync(string userEmail) {
+            return base.Channel.GetUserPurchasedTicketsAsync(userEmail);
         }
     }
 }
