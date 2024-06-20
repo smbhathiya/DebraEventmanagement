@@ -160,6 +160,23 @@
                     background-color: #000;
                     color: #fff;
                 }
+
+                        .btn-primary {
+            background-color: #212529;
+            border-color: #212529;
+            padding: 8px 12px;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            width: 40%;
+        }
+        .btn-primary:hover {
+            background-color: #111111ff;
+        }
+        .btn-primary:active,
+        .btn-primary:focus {
+            background-color: #111111ff;
+        }
     </style>
 
 </head>
@@ -191,7 +208,7 @@
                                         <a class="nav-link" href="Contact.aspx">Contact Us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="action">Profile</a>
+                                         <a class="nav-link" href="Profile.aspx">Profile</a>
                                     </li>
                                 </ul>
                                 <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="logout-btn ml-3" />

@@ -91,9 +91,9 @@ namespace WebApplication1
 
                     string result = service.PurchaseTickets(eventId, ticketCount, email, totalPrice);
 
-                    lblErrorMessage.Text = result;
-                    lblErrorMessage.ForeColor = System.Drawing.Color.Green;
-                    lblErrorMessage.Visible = true;
+                    string script = $@"<script>alert('{result}'); window.location.href = 'Home.aspx';</script>";
+                    ClientScript.RegisterStartupScript(this.GetType(), "PurchaseSuccessScript", script);
+
                 }
                 else
                 {
@@ -105,8 +105,8 @@ namespace WebApplication1
                 lblErrorMessage.Text = "An error occurred: " + ex.Message;
                 lblErrorMessage.Visible = true;
             }
-        
-    
-}
+        }
     }
-}
+
+
+    }
