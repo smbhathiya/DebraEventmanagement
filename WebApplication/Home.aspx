@@ -231,6 +231,7 @@
                             <h2><%# Eval("event_name") %></h2>
                             <p class="important"><%# Eval("description") %></p>
                             <p>Time: <span class="important"><%# Eval("time") %></span></p>
+                            <p>Date: <span class="important"><%# Eval("date") %></span></p>
                             <p>Location: <span class="important"><%# Eval("location") %></span></p>
                             <p>Ticket Price: <span class="important"><%# Eval("ticket_price","Rs. {0:N}") %></span></p>
                             <p>Organized by: <span class="important"><%# Eval("company_name") %></span></p>
