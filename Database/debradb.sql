@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2024 at 06:40 PM
+-- Generation Time: Jun 21, 2024 at 04:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,11 +47,10 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`eventid`, `event_name`, `ticket_price`, `email`, `date`, `time`, `location`, `description`, `imageUrl`, `soldTickets`, `remainingTickets`, `commissionRate`) VALUES
-('2406172016', ' Fashion Week Extravaganza', 100, 'test@gmail.com', '2024-06-19', '10:00 AM', 'New York, NY, USA', 'A week-long event showcasing the latest trends and collections from top fashion designers.', 'Uploads/2406172016.jpg', 1100, 1900, 20),
-('2406190846', ' Tech Innovators Conference 2024', 1000, 'abcd@gmail.com', '', '08:00 AM', 'San Francisco, CA, USA', 'A gathering of technology leaders and innovators to discuss the latest trends and future directions in tech.', 'Uploads/2406190846.jpg', 1000, 4000, 5),
-('2406190847', 'Annual Health and Wellness Expo', 500, 'abcd@gmail.com', '', '08:00 AM', 'Chicago, IL, USA', 'A comprehensive event showcasing the latest in health, fitness, and wellness products and services.', 'Uploads/2406190847.jpg', 200, 800, 10),
-('2406190848', 'World Music Festival', 500, 'abcd@gmail.com', '', '08:00 AM', 'Berlin, Germany', 'An international festival celebrating diverse musical traditions from around the globe.', 'Uploads/2406190848.jpg', 0, 2000, 8),
-('2406190849', 'Culinary Arts Showcase', 1000, 'abcd@gmail.com', '', '09:00 AM', 'Paris, France', 'A gastronomic event featuring renowned chefs and culinary artists presenting their latest creations.', 'Uploads/2406190849.jpg', 1000, 3000, 12);
+('2406172016', ' Fashion Week Extravaganza', 100, 'test@gmail.com', '2024-06-19', '10:00 AM', 'New York, NY, USA', 'A week-long event showcasing the latest trends and collections from top fashion designers.', 'Uploads/2406172016.jpg', 1130, 1870, 20),
+('2406190846', ' Tech Innovators Conference 2024', 1000, 'abcd@gmail.com', '2024-05-25', '08:00 AM', 'San Francisco, CA, USA', 'A gathering of technology leaders and innovators to discuss the latest trends and future directions in tech.', 'Uploads/2406190846.jpg', 2190, 1810, 5),
+('2406190847', 'Annual Health and Wellness Expo', 500, 'abcd@gmail.com', '2024-08-01', '08:00 AM', 'Chicago, IL, USA', 'A comprehensive event showcasing the latest in health, fitness, and wellness products and services.', 'Uploads/2406190847.jpg', 300, 700, 10),
+('2406190849', 'Culinary Arts Showcase', 1000, 'abcd@gmail.com', '2024-12-12', '09:00 AM', 'Paris, France', 'A gastronomic event featuring renowned chefs and culinary artists presenting their latest creations.', 'Uploads/2406190849.jpg', 2000, 2000, 12);
 
 -- --------------------------------------------------------
 
@@ -83,6 +82,7 @@ INSERT INTO `partners` (`id`, `company_name`, `email`, `password`, `address`, `c
 --
 
 CREATE TABLE `sales` (
+  `salesid` varchar(40) NOT NULL,
   `eventid` varchar(100) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `tickets_purchased` int(10) NOT NULL,
@@ -93,8 +93,9 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`eventid`, `user_email`, `tickets_purchased`, `total_price`) VALUES
-('2406172016', 'john@gmail.com', 100, 10000);
+INSERT INTO `sales` (`salesid`, `eventid`, `user_email`, `tickets_purchased`, `total_price`) VALUES
+('001', '2406190846', 'john@gmail.com', 100, 100000),
+('S20240620155551', '2406172016', 'john@gmail.com', 10, 1000);
 
 -- --------------------------------------------------------
 
@@ -157,6 +158,12 @@ ALTER TABLE `partners`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`salesid`,`eventid`);
+
+--
 -- Indexes for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
@@ -176,13 +183,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `partners`
 --
 ALTER TABLE `partners`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
