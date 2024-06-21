@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DesktopApplication.LoginServiceReference;
 
@@ -19,24 +11,45 @@ namespace DesktopApplication
             InitializeComponent();
         }
 
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             try
             {
                 LoginWebServiceSoapClient service = new LoginWebServiceSoapClient();
                 string result = service.Login(txtEmail.Text, txtPassword.Text);
-
-
-                if (result == "Login successful")
+                if (result.StartsWith("Login successful"))
                 {
-                    this.Hide();
-                    Home home = new Home();
-                    home.Show();
+                    string[] parts = result.Split('|');
+                    string userType = parts[1];
+
+                    // Store email and userType for use in other forms
+                    string email = txtEmail.Text;
+
+                    Form nextForm = null;
+
+                    if (userType == "user")
+                    {
+                        nextForm = new Home(email, userType);
+                    }
+                    else if (userType == "partner")
+                    {
+                        nextForm = new PartnerDashboard(email, userType);
+                    }
+                    else if (userType == "admin")
+                    {
+                        nextForm = new AdminDashboard(email, userType);
+                    }
+
+                    if (nextForm != null)
+                    {
+                        this.Hide();
+                        nextForm.ShowDialog();
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(result, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(result, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -44,6 +57,5 @@ namespace DesktopApplication
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        }
+    }
 }
