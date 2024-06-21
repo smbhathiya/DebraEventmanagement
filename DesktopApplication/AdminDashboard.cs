@@ -1,4 +1,5 @@
 ﻿using DesktopApplication.AdminServiceReference;
+using MySqlX.XDevAPI;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -15,9 +16,15 @@ namespace DesktopApplication
             InitializeComponent();
             this.email = email;
             this.userType = userType;
+            this.FormClosing += new FormClosingEventHandler(FormClose);
         }
 
-        private void AdminDashboard_Load(object sender, EventArgs e)
+    private void FormClose(object sender, FormClosingEventArgs e)
+    {
+        Application.Exit();
+    }
+
+    private void AdminDashboard_Load(object sender, EventArgs e)
         {
             ViewEvents();
         }
@@ -51,5 +58,15 @@ namespace DesktopApplication
         {
 
         }
+
+        private void logoutbtn_Click(object sender, EventArgs e)
+        {
+ 
+                Login loginForm = new Login();
+                loginForm.Show();
+                this.Close();
+            }
+
+        
     }
 }

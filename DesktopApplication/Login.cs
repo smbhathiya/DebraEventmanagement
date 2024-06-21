@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using DesktopApplication.LoginServiceReference;
+using Microsoft.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DesktopApplication
 {
@@ -9,7 +12,13 @@ namespace DesktopApplication
         public Login()
         {
             InitializeComponent();
+            this.FormClosing += new FormClosingEventHandler(FormClose);
+
         }
+            private void FormClose(object sender, FormClosingEventArgs e)
+            {
+                Application.Exit(); 
+            }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -22,7 +31,6 @@ namespace DesktopApplication
                     string[] parts = result.Split('|');
                     string userType = parts[1];
 
-                    // Store email and userType for use in other forms
                     string email = txtEmail.Text;
 
                     Form nextForm = null;
@@ -42,9 +50,8 @@ namespace DesktopApplication
 
                     if (nextForm != null)
                     {
-                        this.Hide();
                         nextForm.ShowDialog();
-                        this.Close();
+                        this.Hide();
                     }
                 }
                 else
@@ -57,5 +64,23 @@ namespace DesktopApplication
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register registerForm = new Register();
+            registerForm.Show();
+            this.Hide();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+    
 }
