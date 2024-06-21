@@ -12,7 +12,6 @@
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtUserEmail;
         private System.Windows.Forms.TextBox txtUserPassword;
-        private System.Windows.Forms.TextBox txtUserRePassword;
         private System.Windows.Forms.TextBox txtUserAddress;
         private System.Windows.Forms.TextBox txtUserContact;
         private System.Windows.Forms.Button btnUserRegister;
@@ -46,6 +45,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registration));
             this.lblFormHeading = new System.Windows.Forms.Label();
             this.btnSwitchToUser = new System.Windows.Forms.Button();
             this.btnSwitchToPartner = new System.Windows.Forms.Button();
@@ -57,7 +57,6 @@
             this.lblUserPassword = new System.Windows.Forms.Label();
             this.txtUserPassword = new System.Windows.Forms.TextBox();
             this.lblUserRePassword = new System.Windows.Forms.Label();
-            this.txtUserRePassword = new System.Windows.Forms.TextBox();
             this.lblUserAddress = new System.Windows.Forms.Label();
             this.txtUserAddress = new System.Windows.Forms.TextBox();
             this.lblUserContact = new System.Windows.Forms.Label();
@@ -77,6 +76,9 @@
             this.lblPartnerContact = new System.Windows.Forms.Label();
             this.txtPartnerContact = new System.Windows.Forms.TextBox();
             this.btnPartnerRegister = new System.Windows.Forms.Button();
+            this.txtUserRePassword = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.userFormPanel.SuspendLayout();
             this.partnerFormPanel.SuspendLayout();
             this.SuspendLayout();
@@ -182,14 +184,6 @@
             this.lblUserRePassword.Size = new System.Drawing.Size(130, 30);
             this.lblUserRePassword.TabIndex = 6;
             this.lblUserRePassword.Text = "Re-enter Password:";
-            // 
-            // txtUserRePassword
-            // 
-            this.txtUserRePassword.Location = new System.Drawing.Point(150, 170);
-            this.txtUserRePassword.Name = "txtUserRePassword";
-            this.txtUserRePassword.PasswordChar = '*';
-            this.txtUserRePassword.Size = new System.Drawing.Size(400, 20);
-            this.txtUserRePassword.TabIndex = 7;
             // 
             // lblUserAddress
             // 
@@ -352,15 +346,48 @@
             this.btnPartnerRegister.Text = "Register";
             this.btnPartnerRegister.Click += new System.EventHandler(this.BtnPartnerRegister_Click);
             // 
+            // txtUserRePassword
+            // 
+            this.txtUserRePassword.Location = new System.Drawing.Point(150, 170);
+            this.txtUserRePassword.Name = "txtUserRePassword";
+            this.txtUserRePassword.PasswordChar = '*';
+            this.txtUserRePassword.Size = new System.Drawing.Size(400, 20);
+            this.txtUserRePassword.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(291, 549);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(186, 16);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Already have an account?";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(483, 549);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(135, 16);
+            this.linkLabel1.TabIndex = 7;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Click here to Login";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Registration
             // 
             this.ClientSize = new System.Drawing.Size(900, 600);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.lblFormHeading);
             this.Controls.Add(this.btnSwitchToUser);
             this.Controls.Add(this.btnSwitchToPartner);
             this.Controls.Add(this.userFormPanel);
             this.Controls.Add(this.partnerFormPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Registration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -370,9 +397,12 @@
             this.partnerFormPanel.ResumeLayout(false);
             this.partnerFormPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
-
+        private System.Windows.Forms.TextBox txtUserRePassword;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

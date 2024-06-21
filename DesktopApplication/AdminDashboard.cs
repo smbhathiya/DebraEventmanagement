@@ -19,12 +19,15 @@ namespace DesktopApplication
             this.FormClosing += new FormClosingEventHandler(FormClose);
         }
 
-    private void FormClose(object sender, FormClosingEventArgs e)
-    {
-        Application.Exit();
-    }
+        private void FormClose(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
+        }
 
-    private void AdminDashboard_Load(object sender, EventArgs e)
+        private void AdminDashboard_Load(object sender, EventArgs e)
         {
             ViewEvents();
         }
@@ -64,7 +67,7 @@ namespace DesktopApplication
  
                 Login loginForm = new Login();
                 loginForm.Show();
-                this.Close();
+                this.Hide();
             }
 
         

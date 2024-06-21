@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using DesktopApplication.UserWebServiceReference;
 
 namespace DesktopApplication
 {
@@ -20,17 +22,54 @@ namespace DesktopApplication
             InitializeComponent();
             this.email = email;
             this.userType = userType;
+            GetUserPurchasedTickets(email);
+            this.FormClosing += new FormClosingEventHandler(FormClose);
         }
 
-        private void Home_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormClose(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private async void GetUserPurchasedTickets(string email)
+        {
+            try
+            {
+                // Create instance of your web service client
+                UserWebServiceSoapClient client = new UserWebServiceSoapClient();
+
+                // Call async method to fetch data
+                DataSet ds = await client.GetUserPurchasedTicketsAsync(email);
+
+                // Check if DataSet contains tables
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    // Bind the fetched data to DataGridView
+                    dataGridViewPurchasedTickets.DataSource = ds.Tables[0];
+                }
+                else
+                {
+                    MessageBox.Show("No data found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
         {
 
+            Login loginForm = new Login();
+            loginForm.Show();
+            this.Hide();
         }
+
+
 
     }
 }

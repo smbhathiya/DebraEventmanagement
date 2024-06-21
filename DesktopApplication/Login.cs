@@ -52,6 +52,7 @@ namespace DesktopApplication
                     {
                         nextForm.ShowDialog();
                         this.Hide();
+
                     }
                 }
                 else
