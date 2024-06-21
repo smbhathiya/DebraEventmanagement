@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="RegisterUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contactNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterPartner">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contactNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterPartnerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterPartnerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RegisterUserSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="RegisterUserSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPartnerSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterPartner" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPartnerSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterPartnerResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegistrationWebServiceSoap">
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input message="tns:RegisterUserSoapIn" />
+      <wsdl:output message="tns:RegisterUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPartner">
+      <wsdl:input message="tns:RegisterPartnerSoapIn" />
+      <wsdl:output message="tns:RegisterPartnerSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegistrationWebServiceSoap" type="tns:RegistrationWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegisterUser">
+      <soap:operation soapAction="http://tempuri.org/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPartner">
+      <soap:operation soapAction="http://tempuri.org/RegisterPartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegistrationWebServiceSoap12" type="tns:RegistrationWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegisterUser">
+      <soap12:operation soapAction="http://tempuri.org/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPartner">
+      <soap12:operation soapAction="http://tempuri.org/RegisterPartner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegistrationWebService">
+    <wsdl:port name="RegistrationWebServiceSoap" binding="tns:RegistrationWebServiceSoap">
+      <soap:address location="https://localhost:44320/RegistrationWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegistrationWebServiceSoap12" binding="tns:RegistrationWebServiceSoap12">
+      <soap12:address location="https://localhost:44320/RegistrationWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

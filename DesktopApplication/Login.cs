@@ -72,7 +72,7 @@ namespace DesktopApplication
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Register registerForm = new Register();
+            Registration registerForm = new Registration();
             registerForm.Show();
             this.Hide();
         }
