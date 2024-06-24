@@ -32,7 +32,7 @@ namespace WebApplication1
                     }
                     else if (userType == "partner")
                     {
-                        Response.Redirect("Default.aspx");
+                        Response.Redirect("PartnerDashboard.aspx");
                     }
                     else if (userType == "admin")
                     {

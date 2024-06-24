@@ -71,7 +71,7 @@ namespace WebServices
                 {
                     connection.Open();
                     string query = @"
-                        SELECT e.eventid, e.event_name, e.location, e.time, s.tickets_purchased, e.ticket_price, s.total_price, s.salesid
+                        SELECT  s.salesid, e.eventid, e.event_name, e.location, e.time, s.tickets_purchased, e.ticket_price, s.total_price
                         FROM sales s
                         JOIN events e ON s.eventid = e.eventid
                         WHERE s.user_email = @UserEmail";
@@ -94,60 +94,7 @@ namespace WebServices
                 throw new Exception("An error occurred: " + ex.Message);
             }
         }
-
-
-        [WebMethod]
-        public byte[] GeneratePdf(string salesId)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = @"
-                SELECT e.event_name, e.location, e.time, s.tickets_purchased, e.ticket_price, s.total_price, s.salesid
-                FROM sales s
-                JOIN events e ON s.eventid = e.eventid
-                WHERE s.salesid = @SalesId";
-
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@SalesId", salesId);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-
-                    if (dt.Rows.Count == 0)
-                    {
-                        throw new Exception("No sale found with the specified ID.");
-                    }
-
-                    DataRow eventDetails = dt.Rows[0];
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        Document document = new Document(PageSize.A4);
-                        PdfWriter writer = PdfWriter.GetInstance(document, ms);
-                        document.Open();
-
-                        document.Add(new Paragraph("Sales Report"));
-                        document.Add(new Paragraph("Event Name: " + eventDetails["event_name"]));
-                        document.Add(new Paragraph("Location: " + eventDetails["location"]));
-                        document.Add(new Paragraph("Time: " + eventDetails["time"]));
-                        document.Add(new Paragraph("Tickets Purchased: " + eventDetails["tickets_purchased"]));
-                        document.Add(new Paragraph("Ticket Price: " + String.Format("{0:C}", eventDetails["ticket_price"])));
-                        document.Add(new Paragraph("Total Price: " + String.Format("{0:C}", eventDetails["total_price"])));
-
-                        document.Close();
-                        writer.Close();
-
-                        return ms.ToArray();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while generating the PDF: " + ex.Message);
-            }
-        }
+    
     }
 
 

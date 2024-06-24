@@ -35,7 +35,7 @@ namespace WebServices
                     }
                     else
                     {
-                        return "Invalid username or password.";
+                        return "Invalid email or password.";
                     }
                 }
             }

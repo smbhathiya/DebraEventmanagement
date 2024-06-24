@@ -197,9 +197,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\RegistrationWebServiceReference\RegistrationWebService.wsdl" />
-    <None Include="Connected Services\UserWebServiceReference\DesktopApplication.UserWebServiceReference.GeneratePdfResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\UserWebServiceReference\UserWebService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />

@@ -95,18 +95,36 @@ namespace WebServices
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT eventid, event_name, ticket_price, email, date, time, location, description, imageUrl, soldTickets, remainingTickets FROM events WHERE email = @Email";
+                    string query = "SELECT eventid, event_name, ticket_price, email, date, time, location, description, imageUrl, soldTickets, commissionRate, remainingTickets FROM events WHERE email = @Email";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@Email", email);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
 
+                    dt.Columns.Add("EstimatedIncome", typeof(decimal));
+                    dt.Columns.Add("CurrentIncome", typeof(decimal));
+                    dt.Columns.Add("Commission", typeof(decimal));
+
                     foreach (DataRow row in dt.Rows)
                     {
                         string imageUrl = row["imageUrl"].ToString();
                         string fullImageUrl = "https://localhost:44320/" + imageUrl;
                         row["imageUrl"] = fullImageUrl;
+
+                        decimal ticketPrice = Convert.ToDecimal(row["ticket_price"]);
+                        int soldTickets = Convert.ToInt32(row["soldTickets"]);
+                        int remainingTickets = Convert.ToInt32(row["remainingTickets"]);
+                        decimal commissionRate = Convert.ToDecimal(row["commissionRate"]);
+
+                        decimal estimatedIncome = ticketPrice * (soldTickets + remainingTickets);
+                        decimal currentIncome = ticketPrice * soldTickets;
+
+                        decimal commission = (commissionRate / 100) * currentIncome;
+
+                        row["EstimatedIncome"] = estimatedIncome;
+                        row["CurrentIncome"] = currentIncome;
+                        row["Commission"] = commission;
                     }
 
                     DataSet ds = new DataSet();

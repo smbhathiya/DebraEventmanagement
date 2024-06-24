@@ -74,7 +74,7 @@ namespace WebServices
                     MySqlCommand userAccountCommand = new MySqlCommand(userAccountQuery, connection);
                     userAccountCommand.Parameters.AddWithValue("@Email", email);
                     userAccountCommand.Parameters.AddWithValue("@Password", password);
-                    userAccountCommand.Parameters.AddWithValue("@UserType", "partner"); // Assuming this is for partner registration
+                    userAccountCommand.Parameters.AddWithValue("@UserType", "partner"); 
                     userAccountCommand.ExecuteNonQuery();
 
                     return "Partner registered successfully!";

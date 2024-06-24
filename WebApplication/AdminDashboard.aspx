@@ -207,10 +207,7 @@
                                                 <a class="nav-link active" href="AdminDashboard.aspx">Dashboard</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="About.aspx">About</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="ContactUs.aspx">Contact Us</a>
+                                                <a class="nav-link" href="Home.aspx" target="_blank">View Events</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="action">Profile</a>
