@@ -142,6 +142,38 @@ namespace WebServices
 
 
         [WebMethod]
+        public DataSet GetPartnerByEmail(string email)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT userId, company_name, email, address, contact_no FROM partners WHERE email = @Email";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    DataSet ds = new DataSet();
+                    dt.TableName = "Partner";
+                    ds.Tables.Add(dt);
+
+                    return ds;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred: " + ex.Message);
+            }
+        }
+
+
+
+
+        [WebMethod]
         public string DeleteEvent(string eventid)
         {
             try

@@ -31,6 +31,13 @@ namespace WebApplication1.PartnerServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetEventsByUserEmail", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> GetEventsByUserEmailAsync(string email);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPartnerByEmail", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet GetPartnerByEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPartnerByEmail", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GetPartnerByEmailAsync(string email);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteEvent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         string DeleteEvent(string eventid);
@@ -263,6 +270,14 @@ namespace WebApplication1.PartnerServiceReference {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> GetEventsByUserEmailAsync(string email) {
             return base.Channel.GetEventsByUserEmailAsync(email);
+        }
+        
+        public System.Data.DataSet GetPartnerByEmail(string email) {
+            return base.Channel.GetPartnerByEmail(email);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GetPartnerByEmailAsync(string email) {
+            return base.Channel.GetPartnerByEmailAsync(email);
         }
         
         public string DeleteEvent(string eventid) {

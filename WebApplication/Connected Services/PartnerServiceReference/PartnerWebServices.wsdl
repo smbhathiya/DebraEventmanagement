@@ -46,6 +46,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetPartnerByEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPartnerByEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPartnerByEmailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="DeleteEvent">
         <s:complexType>
           <s:sequence>
@@ -97,6 +118,12 @@
   <wsdl:message name="GetEventsByUserEmailSoapOut">
     <wsdl:part name="parameters" element="tns:GetEventsByUserEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="GetPartnerByEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPartnerByEmail" />
+  </wsdl:message>
+  <wsdl:message name="GetPartnerByEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPartnerByEmailResponse" />
+  </wsdl:message>
   <wsdl:message name="DeleteEventSoapIn">
     <wsdl:part name="parameters" element="tns:DeleteEvent" />
   </wsdl:message>
@@ -117,6 +144,10 @@
     <wsdl:operation name="GetEventsByUserEmail">
       <wsdl:input message="tns:GetEventsByUserEmailSoapIn" />
       <wsdl:output message="tns:GetEventsByUserEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPartnerByEmail">
+      <wsdl:input message="tns:GetPartnerByEmailSoapIn" />
+      <wsdl:output message="tns:GetPartnerByEmailSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="DeleteEvent">
       <wsdl:input message="tns:DeleteEventSoapIn" />
@@ -140,6 +171,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetEventsByUserEmail">
       <soap:operation soapAction="http://tempuri.org/GetEventsByUserEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPartnerByEmail">
+      <soap:operation soapAction="http://tempuri.org/GetPartnerByEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -179,6 +219,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetEventsByUserEmail">
       <soap12:operation soapAction="http://tempuri.org/GetEventsByUserEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPartnerByEmail">
+      <soap12:operation soapAction="http://tempuri.org/GetPartnerByEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
