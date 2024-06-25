@@ -148,5 +148,58 @@ namespace WebServices
             }
         }
 
+
+        [WebMethod]
+        public DataSet GetPartners()
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT userId, company_name, email, address, contact_no FROM partners";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+   
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    DataSet ds = new DataSet();
+                    dt.TableName = "Partners";
+                    ds.Tables.Add(dt);
+
+                    return ds;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred: " + ex.Message);
+            }
+        }
+
+        [WebMethod]
+        public bool DeletePartnerByEmail(string email)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "DELETE FROM partners WHERE email = @Email";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0; 
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred: " + ex.Message);
+            }
+        }
+
+
     }
 }

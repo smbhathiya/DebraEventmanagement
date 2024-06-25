@@ -48,6 +48,37 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetPartners">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPartnersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPartnersResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePartnerByEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePartnerByEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePartnerByEmailResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetAllEventsSoapIn">
@@ -68,6 +99,18 @@
   <wsdl:message name="DeleteEventSoapOut">
     <wsdl:part name="parameters" element="tns:DeleteEventResponse" />
   </wsdl:message>
+  <wsdl:message name="GetPartnersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPartners" />
+  </wsdl:message>
+  <wsdl:message name="GetPartnersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPartnersResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePartnerByEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePartnerByEmail" />
+  </wsdl:message>
+  <wsdl:message name="DeletePartnerByEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePartnerByEmailResponse" />
+  </wsdl:message>
   <wsdl:portType name="AdminWebServicesSoap">
     <wsdl:operation name="GetAllEvents">
       <wsdl:input message="tns:GetAllEventsSoapIn" />
@@ -80,6 +123,14 @@
     <wsdl:operation name="DeleteEvent">
       <wsdl:input message="tns:DeleteEventSoapIn" />
       <wsdl:output message="tns:DeleteEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPartners">
+      <wsdl:input message="tns:GetPartnersSoapIn" />
+      <wsdl:output message="tns:GetPartnersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePartnerByEmail">
+      <wsdl:input message="tns:DeletePartnerByEmailSoapIn" />
+      <wsdl:output message="tns:DeletePartnerByEmailSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="AdminWebServicesSoap" type="tns:AdminWebServicesSoap">
@@ -111,6 +162,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPartners">
+      <soap:operation soapAction="http://tempuri.org/GetPartners" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePartnerByEmail">
+      <soap:operation soapAction="http://tempuri.org/DeletePartnerByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="AdminWebServicesSoap12" type="tns:AdminWebServicesSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -134,6 +203,24 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteEvent">
       <soap12:operation soapAction="http://tempuri.org/DeleteEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPartners">
+      <soap12:operation soapAction="http://tempuri.org/GetPartners" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePartnerByEmail">
+      <soap12:operation soapAction="http://tempuri.org/DeletePartnerByEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
