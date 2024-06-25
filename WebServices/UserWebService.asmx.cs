@@ -94,8 +94,61 @@ namespace WebServices
                 throw new Exception("An error occurred: " + ex.Message);
             }
         }
-    
-    }
+
+        [WebMethod]
+        public DataSet GetUserByEmail(string email)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT userId, name, email, address, contact_no FROM users WHERE email = @Email";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    DataSet ds = new DataSet();
+                    dt.TableName = "User";
+                    ds.Tables.Add(dt);
+
+                    return ds;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred: " + ex.Message);
+            }
+        }
 
 
+        [WebMethod]
+        public bool UpdateUserByEmail(string email, string name, string address, string contactNo)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "UPDATE users SET name = @Name, address = @Address, contact_no = @ContactNo WHERE email = @Email";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.Parameters.AddWithValue("@Address", address);
+                    cmd.Parameters.AddWithValue("@ContactNo", contactNo);
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred: " + ex.Message);
+            }
+        }
+
     }
+}

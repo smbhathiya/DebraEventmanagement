@@ -208,7 +208,7 @@
                                         <a class="nav-link" href="Contact.aspx">Contact Us</a>
                                     </li>
                                     <li class="nav-item">
-                                         <a class="nav-link" href="Profile.aspx">Profile</a>
+                                         <a class="nav-link" href="userProfile.aspx">Profile</a>
                                     </li>
                                 </ul>
                                 <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="logout-btn ml-3" />

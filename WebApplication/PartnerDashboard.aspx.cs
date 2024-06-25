@@ -55,32 +55,62 @@ namespace WebApplication1
 
         protected void AddEventtodb_Click(object sender, EventArgs e)
         {
-            string eventId = eventidtxtbox.Text;
-            string eventName = eventnametxtbox.Text;
-            string ticketPrice = ticketPriceTxtBox.Text;
-            string email = Session["Email"]?.ToString();
-            string date = datbox.Text;
-            string time = DateTime.ParseExact(TextBox5.Text, "HH:mm", CultureInfo.InvariantCulture).ToString("hh:mm tt", CultureInfo.InvariantCulture);
-            string location = TextBox6.Text;
-            string description = TextBox7.Text;
-            int remainingTickets = int.Parse(txtRemainingTickets.Text);
-
-            byte[] imageData = null;
-            if (FileUpload1.HasFile)
+            try
             {
+                if (string.IsNullOrWhiteSpace(eventidtxtbox.Text) ||
+                    string.IsNullOrWhiteSpace(eventnametxtbox.Text) ||
+                    string.IsNullOrWhiteSpace(ticketPriceTxtBox.Text) ||
+                    string.IsNullOrWhiteSpace(datbox.Text) ||
+                    string.IsNullOrWhiteSpace(TextBox5.Text) ||
+                    string.IsNullOrWhiteSpace(TextBox6.Text) ||
+                    string.IsNullOrWhiteSpace(TextBox7.Text) ||
+                    string.IsNullOrWhiteSpace(txtRemainingTickets.Text) ||
+                    !FileUpload1.HasFile)
+                {
+                    Response.Write("<script>alert('Please fill out all fields and upload an image.');</script>");
+                    return;
+                }
+
+                if (!int.TryParse(txtRemainingTickets.Text, out int remainingTickets))
+                {
+                    Response.Write("<script>alert('Invalid format for remaining tickets.');</script>");
+                    return;
+                }
+
+                if (!DateTime.TryParseExact(TextBox5.Text, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime timeValue))
+                {
+                    Response.Write("<script>alert('Invalid time format. Please use HH:mm format.');</script>");
+                    return;
+                }
+                string time = timeValue.ToString("hh:mm tt", CultureInfo.InvariantCulture);
+
+                string eventId = eventidtxtbox.Text;
+                string eventName = eventnametxtbox.Text;
+                string ticketPrice = ticketPriceTxtBox.Text;
+                string email = Session["Email"]?.ToString();
+                string date = datbox.Text;
+                string location = TextBox6.Text;
+                string description = TextBox7.Text;
+
+                byte[] imageData = null;
                 using (Stream fileStream = FileUpload1.PostedFile.InputStream)
                 using (BinaryReader reader = new BinaryReader(fileStream))
                 {
                     imageData = reader.ReadBytes((int)fileStream.Length);
                 }
+
+                var service = new PartnerWebServicesSoapClient();
+                string result = service.AddEvent(eventId, eventName, ticketPrice, email, date, time, location, description, imageData, remainingTickets);
+
+                LoadUserEvents(email);
+                Response.Write("<script>alert('" + result + "');</script>");
             }
-
-            var service = new PartnerWebServicesSoapClient();
-            string result = service.AddEvent(eventId, eventName, ticketPrice, email, date, time, location, description, imageData, remainingTickets);
-
-            LoadUserEvents(email);
-            Response.Write("<script>alert('" + result + "');</script>");
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('An error occurred: " + ex.Message + "');</script>");
+            }
         }
+
 
         protected void gvEvents_RowEditing(object sender, GridViewEditEventArgs e)
         {
