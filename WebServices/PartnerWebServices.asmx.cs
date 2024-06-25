@@ -171,6 +171,30 @@ namespace WebServices
         }
 
 
+        [WebMethod]
+        public bool UpdatePartnerByEmail(string email, string companyName, string address, string contactNo)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "UPDATE partners SET company_name = @CompanyName, address = @Address, contact_no = @ContactNo WHERE email = @Email";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@CompanyName", companyName);
+                    cmd.Parameters.AddWithValue("@Address", address);
+                    cmd.Parameters.AddWithValue("@ContactNo", contactNo);
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred: " + ex.Message);
+            }
+        }
 
 
         [WebMethod]

@@ -70,20 +70,16 @@ namespace WebApplication1
                 if (decimal.TryParse(txtCommissionRate.Text, out decimal newCommissionRate))
                 {
                     UpdateCommission(eventId, newCommissionRate);
-                    // Exit edit mode
                     gvEvents.EditIndex = -1;
-                    // Rebind GridView to reflect changes
                     ViewEvents();
                 }
                 else
                 {
-                    // Handle invalid input
                     Response.Write("<script>alert('Please enter a valid commission rate.');</script>");
                 }
             }
             catch (Exception ex)
             {
-                // Handle the exception
                 Response.Write($"<script>alert('An error occurred while updating commission rate: {ex.Message}');</script>");
             }
         }

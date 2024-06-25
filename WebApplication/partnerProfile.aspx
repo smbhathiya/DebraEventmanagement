@@ -179,13 +179,13 @@
                                     <div class="collapse navbar-collapse" id="navbarNav">
                                         <ul class="navbar-nav">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="AdminDashboard.aspx">Dashboard</a>
+                                                <a class="nav-link " href="AdminDashboard.aspx">Dashboard</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="Home.aspx" target="_blank">View Events</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="action">Profile</a>
+                                                <a class="nav-link active" href="partnerProfile.aspx">Profile</a>
                                             </li>
 
                                         </ul>
@@ -208,11 +208,16 @@
                                         <div><strong>Company Name:</strong>
                                             <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("company_name") %>'></asp:Label></div>
                                         <div><strong>Email:</strong>
-                                            <asp:Label ID="lbl2" runat="server" Text='<%# Eval("email") %>'></asp:Label></div>
-                                        <div><strong>Address:</strong>
-                                            <asp:Label ID="lb3" runat="server" Text='<%# Eval("address") %>'></asp:Label></div>
-                                        <div><strong>Contact No:</strong>
-                                            <asp:Label ID="lbl4" runat="server" Text='<%# Eval("contact_no") %>'></asp:Label></div>
+                                            <asp:Label ID="lbl2" runat="server" Text='<%# Eval("email") %>'></asp:Label>
+                                        </div>
+                                        <div>
+                                            <strong>Address:</strong>
+                                            <asp:Label ID="lb3" runat="server" Text='<%# Eval("address") %>'></asp:Label>
+                                        </div>
+                                        <div>
+                                            <strong>Contact No:</strong>
+                                            <asp:Label ID="lbl4" runat="server" Text='<%# Eval("contact_no") %>'></asp:Label>
+                                        </div>
                                         <div class="edit-buttons">
                                             <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn-primary btn-sm" />
                                         </div>
@@ -220,12 +225,21 @@
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <div class="form-group">
-                                        <label><strong>Company Name:</strong></label>
-                                        <asp:TextBox ID="txtEventName" runat="server" Text='<%# Bind("company_name") %>' CssClass="form-control"></asp:TextBox>
+                                        <div>
+                                            <strong>User Id:</strong>
+                                            <asp:TextBox ID="lblEventId" runat="server" Text='<%# Bind("userId") %>' CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>Email:</strong></label>
-                                        <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("email") %>' CssClass="form-control"></asp:TextBox>
+
+                                        <label><strong>Company Name:</strong></label>
+                                        <asp:TextBox ID="txtCompanyName" runat="server" Text='<%# Bind("company_name") %>' CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <strong>Email:</strong>
+                                            <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("email") %>' CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label><strong>Address:</strong></label>

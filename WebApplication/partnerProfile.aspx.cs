@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.PartnerServiceReference;
@@ -69,27 +70,55 @@ namespace WebApplication1
             gvUser.EditIndex = e.NewEditIndex;
             LoadUserData(Session["Email"].ToString());
         }
-
-        protected void gvUser_RowUpdating(object sender, GridViewUpdateEventArgs e)
+         protected void gvUser_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            GridViewRow row = gvUser.Rows[e.RowIndex];
-            int userId = Convert.ToInt32(gvUser.DataKeys[e.RowIndex].Value);
-
-            TextBox txtCompanyName = (TextBox)row.FindControl("txtEventName");
-            TextBox txtEmail = (TextBox)row.FindControl("txtEmail");
-            TextBox txtAddress = (TextBox)row.FindControl("txtAddress");
-            TextBox txtContactNo = (TextBox)row.FindControl("txtContactNo");
-
-            // Update logic here
-
-            gvUser.EditIndex = -1; // Exit edit mode
+            gvUser.EditIndex = -1; 
             LoadUserData(Session["Email"].ToString());
         }
 
-        protected void gvUser_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        protected void gvUser_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            gvUser.EditIndex = -1; // Exit edit mode
-            LoadUserData(Session["Email"].ToString());
+            try
+            {
+                GridViewRow row = gvUser.Rows[e.RowIndex];
+
+                TextBox txtEmail = row.FindControl("txtEmail") as TextBox;
+                TextBox txtCompanyName = row.FindControl("txtCompanyName") as TextBox;
+                TextBox txtAddress = row.FindControl("txtAddress") as TextBox;
+                TextBox txtContactNo = row.FindControl("txtContactNo") as TextBox;
+
+                if (txtEmail == null || txtCompanyName == null || txtAddress == null || txtContactNo == null)
+                {
+                    throw new Exception("One or more controls were not found.");
+                }
+
+                string email = txtEmail.Text;
+                string companyName = txtCompanyName.Text;
+                string address = txtAddress.Text;
+                string contactNo = txtContactNo.Text;
+
+                var service = new PartnerWebServicesSoapClient();
+
+                bool updateSuccess = service.UpdatePartnerByEmail(email, companyName, address, contactNo);
+
+                if (updateSuccess)
+                {
+                    Response.Write("<script>alert('Update successful.');</script>");
+
+
+                    gvUser.EditIndex = -1;
+
+                    LoadUserData(email);
+                }
+                else
+                {
+                    throw new Exception("Update failed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('An error occurred while updating the partner: " + ex.Message + "');</script>");
+            }
         }
 
     }
