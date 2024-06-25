@@ -210,7 +210,7 @@
                                                 <a class="nav-link" href="Home.aspx" target="_blank">View Events</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="action">Profile</a>
+                                                <a class="nav-link" href="ViewPartners.aspx">Partners</a>
                                             </li>
 
                                         </ul>
