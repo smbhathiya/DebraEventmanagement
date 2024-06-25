@@ -43,7 +43,8 @@ namespace WebApplication1
             RegistrationWebServiceSoapClient service = new RegistrationWebServiceSoapClient();
             string result = service.RegisterPartner(partnerCompanyName, partnerEmail, partnerPassword, partnerAddress, partnerContact);
 
-            Response.Write(result);
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{result}');", true);
         }
     }
 }
+
