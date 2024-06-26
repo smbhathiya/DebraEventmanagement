@@ -171,11 +171,42 @@
         h2 {
             font-weight: bold;
         }
+                .footer {
+    background-color: #212529;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .footer a {
+        color: #fddc5c;
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        html, body {
+    height: 100%;
+    margin: 0;
+}
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+        }
 
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+                <div class="wrapper">
+            <div class="content">
         <div class="top-bar">
             <div class="container-fluid">
                 <div class="row">
@@ -200,7 +231,7 @@
                                         <a class="nav-link" href="Contact.aspx">Contact Us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Profile.aspx">Profile</a>
+                                        <a class="nav-link" href="userProfile.aspx">Profile</a>
                                     </li>
                                 </ul>
                                 <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="logout-btn ml-3" />
@@ -249,6 +280,19 @@
                         <asp:Button ID="btnBuyTickets" runat="server" Text="Buy Tickets" OnClick="btnBuyTickets_Click" CssClass="btn btn-primary btn-block" />
                         <asp:Label ID="lblErrorMessage" runat="server" CssClass="lbl-error-message" ForeColor="Red" Visible="false"></asp:Label>
                     </div>
+                </div>
+            </div>
+        </div>
+</div>
+            <div class="footer">
+                <div class="container">
+                    <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
+                    <p>
+                        Follow us on 
+                    <a href="#">Facebook</a>, 
+                    <a href="#">X</a>, 
+                    <a href="#">Instagram</a>
+                    </p>
                 </div>
             </div>
         </div>

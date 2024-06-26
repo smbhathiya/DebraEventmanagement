@@ -8,10 +8,9 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: #fff;
+            background-color: #f8f9fa;
             font-family: Arial, sans-serif;
-            color: #000;
-            height: 100vh;
+            color: #333;
         }
 
         .top-bar {
@@ -31,13 +30,6 @@
                 font-size: 18px;
             }
 
-        .page-title h3 {
-            text-align: center;
-            color: #212529;
-            padding: 15px;
-            font-weight: bold;
-        }
-
         .navbar {
             margin-top: 10px;
         }
@@ -56,7 +48,6 @@
                 color: #fddc5c;
                 text-decoration: underline;
             }
-
 
         .navbar-toggler {
             border: none;
@@ -82,6 +73,51 @@
                 font-weight: bold;
                 text-decoration: none;
             }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+            .table th,
+            .table td {
+                border: 1px solid #ddd;
+            }
+
+        .table-container {
+            margin: 40px;
+        }
+
+        .table th {
+            background-color: #212529;
+            color: #fff;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .table .table {
+            background-color: #fff;
+        }
 
         .footer {
             background-color: #212529;
@@ -115,48 +151,75 @@
             flex: 1;
         }
 
-        .profile-info {
-        padding: 40px;
+.profile-card {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
         background-color: #f8f9fa;
         border-radius: 5px;
     }
 
-
-
-    .profile-info strong {
+    .profile-info-item strong {
         font-weight: bold;
     }
 
+    .profile-edit-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-edit-form .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .profile-edit-form .form-group label {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .profile-edit-form .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
 
     .edit-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
         margin-top: 10px;
     }
 
-    .btn-primary {
-        color: #fff;
-        background-color: #212529;
-        border-color: #212529;
-        width: 100px;
+    .edit-buttons .btn {
+        padding: 10px 20px;
+        font-size: 16px;
     }
-
-
-
-    .btn-secondary {
-        color: #fff;
-        background-color: #6c757d;
-        border-color: #6c757d;
-        width: 100px;
-    }
-
-    .btn-secondary:hover {
-        color: #fff;
-        background-color: #495057;
-        border-color: #495057;
-    }
-    .table{
+        .profile-table th {
+        background-color: #fff !important;
+        color: #000 !important;
+        text-align: left;
+        padding: 0px;
+        font-size: 18px;
         border-color:white;
     }
-
     </style>
 
 </head>
@@ -197,66 +260,72 @@
                     </div>
                 </div>
 
-                    <asp:GridView ID="gvUser" runat="server" AutoGenerateColumns="False" CssClass="table"
-                        OnRowEditing="gvUser_RowEditing" OnRowUpdating="gvUser_RowUpdating" OnRowCancelingEdit="gvUser_RowCancelingEdit">
-                        <Columns>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <div class="profile-info">
-                                        <div><strong>User Id:</strong>
-                                            <asp:Label ID="lblEventId" runat="server" Text='<%# Eval("userId") %>'></asp:Label></div>
-                                        <div><strong>Company Name:</strong>
-                                            <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("company_name") %>'></asp:Label></div>
-                                        <div><strong>Email:</strong>
-                                            <asp:Label ID="lbl2" runat="server" Text='<%# Eval("email") %>'></asp:Label>
-                                        </div>
-                                        <div>
-                                            <strong>Address:</strong>
-                                            <asp:Label ID="lb3" runat="server" Text='<%# Eval("address") %>'></asp:Label>
-                                        </div>
-                                        <div>
-                                            <strong>Contact No:</strong>
-                                            <asp:Label ID="lbl4" runat="server" Text='<%# Eval("contact_no") %>'></asp:Label>
-                                        </div>
-                                        <div class="edit-buttons">
-                                            <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn-primary btn-sm" />
-                                        </div>
-                                    </div>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <div class="form-group">
-                                        <div>
-                                            <strong>User Id:</strong>
-                                            <asp:TextBox ID="lblEventId" runat="server" Text='<%# Bind("userId") %>' CssClass="form-control" Enabled="false"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-
-                                        <label><strong>Company Name:</strong></label>
-                                        <asp:TextBox ID="txtCompanyName" runat="server" Text='<%# Bind("company_name") %>' CssClass="form-control"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <div>
-                                            <strong>Email:</strong>
-                                            <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("email") %>' CssClass="form-control" Enabled="false"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>Address:</strong></label>
-                                        <asp:TextBox ID="txtAddress" runat="server" Text='<%# Bind("address") %>' CssClass="form-control"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>Contact No:</strong></label>
-                                        <asp:TextBox ID="txtContactNo" runat="server" Text='<%# Bind("contact_no") %>' CssClass="form-control"></asp:TextBox>
-                                    </div>
-                                    <div class="edit-buttons">
-                                        <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-primary btn-sm" />
-                                        <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-sm" />
-                                    </div>
-                                </EditItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+<div class="container mt-4">
+    <div class="profile-card mx-auto">
+        <asp:GridView ID="gvUser" runat="server" AutoGenerateColumns="False" CssClass="table profile-table"
+            OnRowEditing="gvUser_RowEditing" OnRowUpdating="gvUser_RowUpdating" OnRowCancelingEdit="gvUser_RowCancelingEdit">
+            <Columns>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <div class="profile-info">
+                            <div class="profile-info-item">
+                                <strong>User Id:</strong>
+                                <asp:Label ID="lblEventId" runat="server" Text='<%# Eval("userId") %>'></asp:Label>
+                            </div>
+                            <div class="profile-info-item">
+                                <strong>Company Name:</strong>
+                                <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("company_name") %>'></asp:Label>
+                            </div>
+                            <div class="profile-info-item">
+                                <strong>Email:</strong>
+                                <asp:Label ID="lbl2" runat="server" Text='<%# Eval("email") %>'></asp:Label>
+                            </div>
+                            <div class="profile-info-item">
+                                <strong>Address:</strong>
+                                <asp:Label ID="lb3" runat="server" Text='<%# Eval("address") %>'></asp:Label>
+                            </div>
+                            <div class="profile-info-item">
+                                <strong>Contact No:</strong>
+                                <asp:Label ID="lbl4" runat="server" Text='<%# Eval("contact_no") %>'></asp:Label>
+                            </div>
+                            <div class="edit-buttons">
+                                <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn-primary btn-md" />
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <div class="profile-edit-form">
+                            <div class="form-group">
+                                <label><strong>User Id:</strong></label>
+                                <asp:TextBox ID="txtUserId" runat="server" Text='<%# Bind("userId") %>' CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>User Name:</strong></label>
+                                <asp:TextBox ID="txtCompanyName" runat="server" Text='<%# Bind("company_name") %>' CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Email:</strong></label>
+                                <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("email") %>' CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Address:</strong></label>
+                                <asp:TextBox ID="txtAddress" runat="server" Text='<%# Bind("address") %>' CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Contact No:</strong></label>
+                                <asp:TextBox ID="txtContactNo" runat="server" Text='<%# Bind("contact_no") %>' CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="edit-buttons">
+                                <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update" Text="Update" CssClass="btn btn-success btn-md" />
+                                <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="btn btn-secondary btn-md" />
+                            </div>
+                        </div>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</div>
                                             </div>
 
         <div class="footer">
@@ -265,7 +334,7 @@
                 <p>
                     Follow us on 
                     <a href="#">Facebook</a>, 
-                    <a href="#">Twitter</a>, 
+                    <a href="#">X</a>, 
                     <a href="#">Instagram</a>
                 </p>
             </div>

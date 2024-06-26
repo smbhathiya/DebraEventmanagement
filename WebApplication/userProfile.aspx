@@ -275,8 +275,8 @@
                                 <asp:Label ID="lblEventId" runat="server" Text='<%# Eval("userId") %>'></asp:Label>
                             </div>
                             <div class="profile-info-item">
-                                <strong>Company Name:</strong>
-                                <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("name") %>'></asp:Label>
+                                <strong>Name:</strong>
+                                <asp:Label ID="lblName" runat="server" Text='<%# Eval("name") %>'></asp:Label>
                             </div>
                             <div class="profile-info-item">
                                 <strong>Email:</strong>
@@ -404,7 +404,7 @@
                     <p>
                         Follow us on 
                     <a href="#">Facebook</a>, 
-                    <a href="#">Twitter</a>, 
+                    <a href="#">X</a>, 
                     <a href="#">Instagram</a>
                     </p>
                 </div>

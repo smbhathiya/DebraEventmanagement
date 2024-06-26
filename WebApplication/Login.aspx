@@ -20,7 +20,7 @@
         }
         .login-form {
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 40px;
             max-width: 500px;
             width: 100%;
@@ -97,11 +97,12 @@
 <body>
 <form id="form1" runat="server">
     <div class="container">
-        <h2 class="form-heading">
-            <span class="small-text">Welcome to</span><br />
-            <span class="large-text">DEBRA</span>
-        </h2>
+        
         <div class="login-form">
+            <h2 class="form-heading">
+    <span class="small-text">Welcome to</span><br />
+    <span class="large-text">DEBRA</span>
+</h2>
             <div class="form-group">
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Placeholder="Email address" TextMode="Email"></asp:TextBox>
             </div>

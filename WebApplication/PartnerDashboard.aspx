@@ -536,7 +536,7 @@
                     <p>
                         Follow us on 
                     <a href="#">Facebook</a>, 
-                    <a href="#">Twitter</a>, 
+                    <a href="#">X</a>, 
                     <a href="#">Instagram</a>
                     </p>
                 </div>

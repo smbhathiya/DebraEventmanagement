@@ -29,7 +29,7 @@
         }
         .register-form {
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 40px;
             max-width: 800px;
             width: 100%;

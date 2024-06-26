@@ -134,7 +134,7 @@
                                         <a class="nav-link active" href="Contact.aspx">Contact Us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Profile.aspx">Profile</a>
+                                        <a class="nav-link" href="userProfile.aspx">Profile</a>
                                     </li>
                                 </ul>
                                 <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="logout-btn ml-3" />
@@ -153,7 +153,7 @@
                     <p>
                         Follow us on 
                     <a href="#">Facebook</a>, 
-                    <a href="#">Twitter</a>, 
+                    <a href="#">X</a>, 
                     <a href="#">Instagram</a>
                     </p>
                 </div>
