@@ -71,7 +71,7 @@ namespace WebServices
                 {
                     connection.Open();
                     string query = @"
-                        SELECT  s.salesid, e.eventid, e.event_name, e.location, e.time, s.tickets_purchased, e.ticket_price, s.total_price
+                        SELECT  s.salesid, e.eventid, e.event_name, e.location, e.time, e.date, s.tickets_purchased, e.ticket_price, s.total_price
                         FROM sales s
                         JOIN events e ON s.eventid = e.eventid
                         WHERE s.user_email = @UserEmail";

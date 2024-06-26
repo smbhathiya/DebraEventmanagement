@@ -125,6 +125,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PartnerServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\RegistrationWebServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -190,6 +195,13 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\LoginServiceReference\LoginWebService.wsdl" />
+    <None Include="Connected Services\PartnerServiceReference\DesktopApplication.PartnerServiceReference.AddEventResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PartnerServiceReference\DesktopApplication.PartnerServiceReference.UpdateEventResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PartnerServiceReference\PartnerWebServices.wsdl" />
     <None Include="Connected Services\RegistrationWebServiceReference\DesktopApplication.RegistrationWebServiceReference.RegisterPartnerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -219,6 +231,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AdminServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\LoginServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\PartnerServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\RegistrationWebServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\UserWebServiceReference\" />
   </ItemGroup>
@@ -283,6 +296,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\PartnerServiceReference\PartnerWebServices.disco" />
+    <None Include="Connected Services\PartnerServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\PartnerServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\PartnerServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

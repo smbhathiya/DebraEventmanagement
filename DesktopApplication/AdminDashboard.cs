@@ -44,6 +44,26 @@ namespace DesktopApplication
                     var dt = eventsDataSet.Tables[0];
 
                     gvEvents.DataSource = null;
+                    gvEvents.AutoGenerateColumns = false;
+                    gvEvents.Columns.Clear();
+
+                    // Add the necessary columns
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "Company Name", DataPropertyName = "company_name", HeaderText = "Company Name" });
+
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "EventID", DataPropertyName = "eventid", HeaderText = "Event ID" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "EventName", DataPropertyName = "event_name", HeaderText = "Event Name" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "TicketPrice", DataPropertyName = "ticket_price", HeaderText = "Ticket Price" });
+
+
+
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "SoldTickets", DataPropertyName = "soldTickets", HeaderText = "Sold Tickets" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "RemainingTickets", DataPropertyName = "remainingTickets", HeaderText = "Remaining Tickets" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "CommissionRate", DataPropertyName = "CommissionRate", HeaderText = "Commission Rate" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "EstimatedIncome", DataPropertyName = "EstimatedIncome", HeaderText = "Estimated Income" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "CurrentIncome", DataPropertyName = "CurrentIncome", HeaderText = "Current Income" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "Commission", DataPropertyName = "Commission", HeaderText = "Commission" });
+
+
                     gvEvents.DataSource = dt;
                 }
                 else

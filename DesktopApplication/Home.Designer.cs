@@ -24,6 +24,9 @@ namespace DesktopApplication
 
         #region Windows Form Designer generated code
 
+        private System.Windows.Forms.DataGridView gvEvents;
+        private System.Windows.Forms.Button logoutbtn;
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -31,58 +34,54 @@ namespace DesktopApplication
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
-            this.dataGridViewPurchasedTickets = new System.Windows.Forms.DataGridView();
-            this.btnLogout = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPurchasedTickets)).BeginInit();
+            this.gvEvents = new System.Windows.Forms.DataGridView();
+            this.logoutbtn = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEvents)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridViewPurchasedTickets
+            // gvEvents
             // 
-            this.dataGridViewPurchasedTickets.AllowUserToAddRows = false;
-            this.dataGridViewPurchasedTickets.AllowUserToDeleteRows = false;
-            this.dataGridViewPurchasedTickets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewPurchasedTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPurchasedTickets.Location = new System.Drawing.Point(13, 14);
-            this.dataGridViewPurchasedTickets.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridViewPurchasedTickets.Name = "dataGridViewPurchasedTickets";
-            this.dataGridViewPurchasedTickets.ReadOnly = true;
-            this.dataGridViewPurchasedTickets.Size = new System.Drawing.Size(1180, 600);
-            this.dataGridViewPurchasedTickets.TabIndex = 0;
+            this.gvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvEvents.Location = new System.Drawing.Point(12, 23);
+            this.gvEvents.Name = "gvEvents";
+            this.gvEvents.Size = new System.Drawing.Size(1184, 595);
+            this.gvEvents.TabIndex = 0;
             // 
-            // btnLogout
+            // logoutbtn
             // 
-            this.btnLogout.Location = new System.Drawing.Point(1054, 642);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(159, 48);
-            this.btnLogout.TabIndex = 1;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.logoutbtn.BackColor = System.Drawing.Color.Black;
+            this.logoutbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logoutbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logoutbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logoutbtn.ForeColor = System.Drawing.Color.White;
+            this.logoutbtn.Location = new System.Drawing.Point(1055, 635);
+            this.logoutbtn.Name = "logoutbtn";
+            this.logoutbtn.Size = new System.Drawing.Size(141, 42);
+            this.logoutbtn.TabIndex = 1;
+            this.logoutbtn.Text = "Logout";
+            this.logoutbtn.UseVisualStyleBackColor = false;
+            this.logoutbtn.Click += new System.EventHandler(this.logoutbtn_Click);
             // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1250, 720);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.dataGridViewPurchasedTickets);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClientSize = new System.Drawing.Size(1209, 700);
+            this.Controls.Add(this.logoutbtn);
+            this.Controls.Add(this.gvEvents);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Debra Home";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPurchasedTickets)).EndInit();
+            this.Text = "USER HOME";
+            this.Load += new System.EventHandler(this.UserHome_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gvEvents)).EndInit();
             this.ResumeLayout(false);
 
         }
 
-        private DataGridView dataGridViewPurchasedTickets;
-        private Button btnLogout;
+        #endregion
     }
-
-    #endregion
 }

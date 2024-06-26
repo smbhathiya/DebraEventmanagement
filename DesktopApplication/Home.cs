@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DesktopApplication.UserWebServiceReference;
+using System;
 using System.Windows.Forms;
-using System.Diagnostics;
-using DesktopApplication.UserWebServiceReference;
 
 namespace DesktopApplication
 {
@@ -34,34 +26,52 @@ namespace DesktopApplication
             }
         }
 
-        private async void GetUserPurchasedTickets(string email)
+        private void GetUserPurchasedTickets(string email)
         {
             try
             {
-                // Create instance of your web service client
-                UserWebServiceSoapClient client = new UserWebServiceSoapClient();
+                var service = new UserWebServiceSoapClient();
+                var ticketsDataSet = service.GetUserPurchasedTickets(email);
 
-                // Call async method to fetch data
-                DataSet ds = await client.GetUserPurchasedTicketsAsync(email);
-
-                // Check if DataSet contains tables
-                if (ds != null && ds.Tables.Count > 0)
+                if (ticketsDataSet != null && ticketsDataSet.Tables.Count > 0 && ticketsDataSet.Tables[0].Rows.Count > 0)
                 {
-                    // Bind the fetched data to DataGridView
-                    dataGridViewPurchasedTickets.DataSource = ds.Tables[0];
+                    var dt = ticketsDataSet.Tables[0];
+
+                    gvEvents.DataSource = null;
+                    gvEvents.AutoGenerateColumns = false;
+                    gvEvents.Columns.Clear();
+
+                    // Add the necessary columns
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "SalesID", DataPropertyName = "salesid", HeaderText = "Sales ID" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "EventName", DataPropertyName = "event_name", HeaderText = "Event Name" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "Location", DataPropertyName = "location", HeaderText = "Location" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "Date", DataPropertyName = "date", HeaderText = "Date" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "Time", DataPropertyName = "time", HeaderText = "Time" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "TicketCount", DataPropertyName = "tickets_purchased", HeaderText = "Ticket Count" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "TicketPrice", DataPropertyName = "ticket_price", HeaderText = "Ticket Price" });
+                    this.gvEvents.Columns.Add(new DataGridViewTextBoxColumn { Name = "TotalPrice", DataPropertyName = "total_price", HeaderText = "Total Price" });
+
+                    gvEvents.DataSource = dt;
                 }
                 else
                 {
-                    MessageBox.Show("No data found.");
+                    gvEvents.DataSource = null;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                Console.WriteLine("An error occurred while retrieving events: " + ex.Message);
             }
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void UserHome_Load(object sender, EventArgs e)
+        {
+            GetUserPurchasedTickets(email);
+        }
+
+
+
+        private void logoutbtn_Click(object sender, EventArgs e)
         {
 
             Login loginForm = new Login();

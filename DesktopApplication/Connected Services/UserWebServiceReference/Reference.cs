@@ -29,6 +29,20 @@ namespace DesktopApplication.UserWebServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserPurchasedTickets", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> GetUserPurchasedTicketsAsync(string userEmail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserByEmail", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet GetUserByEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserByEmail", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GetUserByEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateUserByEmail", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool UpdateUserByEmail(string email, string name, string address, string contactNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateUserByEmail", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> UpdateUserByEmailAsync(string email, string name, string address, string contactNo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -72,6 +86,22 @@ namespace DesktopApplication.UserWebServiceReference {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> GetUserPurchasedTicketsAsync(string userEmail) {
             return base.Channel.GetUserPurchasedTicketsAsync(userEmail);
+        }
+        
+        public System.Data.DataSet GetUserByEmail(string email) {
+            return base.Channel.GetUserByEmail(email);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GetUserByEmailAsync(string email) {
+            return base.Channel.GetUserByEmailAsync(email);
+        }
+        
+        public bool UpdateUserByEmail(string email, string name, string address, string contactNo) {
+            return base.Channel.UpdateUserByEmail(email, name, address, contactNo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateUserByEmailAsync(string email, string name, string address, string contactNo) {
+            return base.Channel.UpdateUserByEmailAsync(email, name, address, contactNo);
         }
     }
 }

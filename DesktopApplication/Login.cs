@@ -50,8 +50,8 @@ namespace DesktopApplication
 
                     if (nextForm != null)
                     {
-                        nextForm.ShowDialog();
-                        this.Hide();
+                        nextForm.Show();
+                        Hide();
 
                     }
                 }
