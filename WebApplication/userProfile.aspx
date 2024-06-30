@@ -7,10 +7,13 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <style>
-        body {
-            background-color: #f8f9fa;
+                body {
+            background: url('Images/img1.jpg') no-repeat center center fixed;
+            background-size: cover;
             font-family: Arial, sans-serif;
-            color: #333;
+            color: #000;
+            height: 100vh;
+            margin: 0;
         }
 
         .top-bar {
@@ -78,7 +81,7 @@
             width: 100%;
             max-width: 100%;
             margin-bottom: 1rem;
-            background-color: transparent;
+            background-color: white;
             border-collapse: separate;
             border-spacing: 0;
             border-radius: 10px;

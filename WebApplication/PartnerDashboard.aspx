@@ -140,8 +140,9 @@
         }
 
             .btn-custom:hover {
-                background-color: #333;
+                background-color: #000;
                 color: #fff;
+                text-decoration: none;
             }
 
         .section {

@@ -10,9 +10,12 @@
 
     <style>
         body {
-            background-color: #fff;
+            background: url('Images/img1.jpg') no-repeat center center fixed;
+            background-size: cover;
             font-family: Arial, sans-serif;
             color: #000;
+            height: 100vh;
+            margin: 0;
         }
 
         .top-bar {
@@ -81,11 +84,11 @@
         .event-card {
             border: 1px solid #ddd;
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            background-color: #f8f9fa;
+            background: rgba(255, 255, 255, 0.8);
         }
 
         .event-image {
@@ -93,18 +96,26 @@
             margin-right: 20px;
             width: 100%;
             height: auto;
+            border-radius: 10px;
         }
 
         .event-image-container {
             width: 200px;
             height: 300px;
             overflow: hidden;
-            margin: 25px;
+            margin-right: 25px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            margin-left: 5px;
         }
 
         .event-details {
             flex: 1 1 auto;
         }
+
+            .event-details h2 {
+                font-weight: 700;
+            }
 
             .event-details h3 {
                 margin-top: 0;
@@ -147,21 +158,21 @@
                 display: block;
                 width: 50px;
                 height: 50px;
-                background-color: #212529;
+                background-color: #ffa04d;
                 border-radius: 50%;
                 text-align: center;
                 line-height: 50px;
-                color: #fff;
+                color: #000;
                 font-size: 24px;
                 text-decoration: none;
             }
 
                 #back-to-top a:hover {
-                    background-color: #000;
-                    color: #fff;
+                    background-color: #fa8d2d;
+                    color: #000;
                 }
 
-                        .btn-primary {
+        .btn-primary {
             background-color: #212529;
             border-color: #212529;
             padding: 8px 12px;
@@ -170,13 +181,19 @@
             transition: background-color 0.3s ease;
             width: 40%;
         }
-        .btn-primary:hover {
-            background-color: #111111ff;
-        }
-        .btn-primary:active,
-        .btn-primary:focus {
-            background-color: #111111ff;
-        }
+
+            .btn-primary:hover {
+                background-color: #000;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .btn-primary:active,
+            .btn-primary:focus {
+                background-color: #000;
+                color: #fff;
+                text-decoration: none;
+            }
     </style>
 
 </head>
@@ -208,7 +225,7 @@
                                         <a class="nav-link" href="Contact.aspx">Contact Us</a>
                                     </li>
                                     <li class="nav-item">
-                                         <a class="nav-link" href="userProfile.aspx">Profile</a>
+                                        <a class="nav-link" href="userProfile.aspx">Profile</a>
                                     </li>
                                 </ul>
                                 <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="logout-btn ml-3" />
@@ -221,7 +238,7 @@
         </div>
 
         <div class="container mt-4">
-            <asp:Repeater ID="EventRepeater" runat="server"  OnItemCommand="EventRepeater_ItemCommand">
+            <asp:Repeater ID="EventRepeater" runat="server" OnItemCommand="EventRepeater_ItemCommand">
                 <ItemTemplate>
                     <div class="event-card">
                         <div class="event-image-container">
@@ -261,22 +278,22 @@
             <i class="fas fa-chevron-up"></i>
         </a>
     </div>
-        <script>
+    <script>
 
-            window.onscroll = function () {
-                const backToTopButton = document.getElementById('back-to-top');
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    backToTopButton.style.display = 'block';
-                } else {
-                    backToTopButton.style.display = 'none';
-                }
-            };
+        window.onscroll = function () {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        };
 
-            document.getElementById('back-to-top').addEventListener('click', function (e) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        </script>
+        document.getElementById('back-to-top').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

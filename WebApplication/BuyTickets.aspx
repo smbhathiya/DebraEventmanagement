@@ -8,9 +8,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: #f8f9fa;
+            background: url('Images/img1.jpg') no-repeat center center fixed;
+            background-size: cover;
             font-family: Arial, sans-serif;
-            color: #333;
+            color: #000;
+            height: 100vh;
+            margin: 0;
         }
 
         .top-bar {
@@ -79,7 +82,7 @@
         }
 
         .event-details {
-            background-color: #fff;
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid #dee2e6;
             border-radius: 10px;
             padding: 30px;
@@ -149,6 +152,7 @@
             margin-bottom: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
         }
 
         .section-title {
@@ -285,7 +289,7 @@
         </div>
 </div>
             <div class="footer">
-                <div class="container">
+                <div class="footer-container">
                     <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
                     <p>
                         Follow us on 

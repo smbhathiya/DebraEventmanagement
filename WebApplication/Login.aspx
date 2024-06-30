@@ -134,19 +134,19 @@
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="Images/img1.jpg" alt="First slide">
+                            <img class="d-block w-100" src="Images/img1.jpg" alt="First slide"/>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="Images/img2.jpg" alt="Second slide">
+                            <img class="d-block w-100" src="Images/img2.jpg" alt="Second slide"/>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="Images/img3.jpg" alt="Third slide">
+                            <img class="d-block w-100" src="Images/img3.jpg" alt="Third slide"/>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="Images/img4.jpg" alt="Fourth slide">
+                            <img class="d-block w-100" src="Images/img4.jpg" alt="Fourth slide"/>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="Images/img5.jpg" alt="Fifth slide">
+                            <img class="d-block w-100" src="Images/img5.jpg" alt="Fifth slide"/>
                         </div>
                     </div>
                 </div>

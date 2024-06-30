@@ -7,50 +7,65 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: #fff;
+            background: url('Images/img1.jpg') no-repeat center center fixed;
+            background-size: cover;
             font-family: Arial, sans-serif;
             color: #000;
+            height: 100vh;
+            margin: 0;
         }
+
         .top-bar {
             background-color: #212529;
-            font-size:40px;
+            font-size: 40px;
             color: #fff;
             text-align: left;
             padding: 20px 10px 10px 20px;
         }
-        .top-bar h1{
-            font-weight:700;
-        }
+
+            .top-bar h1 {
+                font-weight: 700;
+            }
+
         .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin: 25px auto;
+            border-radius: 15px;
         }
+
+
+
         .register-form {
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 40px;
             max-width: 800px;
             width: 100%;
             color: #000;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-control {
             border: 1px solid #ccc;
             border-radius: 15px;
             padding: 22px;
             font-size: 16px;
-            text-align: left; 
+            text-align: left;
             transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
-        .form-control:focus {
-            outline: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-color: #007bff;
-        }
+
+            .form-control:focus {
+                outline: none;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-color: #007bff;
+            }
+
         .btn-register {
             background-color: #212529;
             border: none;
@@ -62,73 +77,102 @@
             width: 100%;
             transition: background-color 0.3s ease;
         }
-        .btn-register:hover {
-            background-color: #333;
-            color: #fff;
-        }
+
+            .btn-register:hover {
+                background-color: #333;
+                color: #fff;
+            }
+
         .form-heading {
             text-align: center;
             margin-bottom: 40px;
             margin-top: 40px;
         }
-        .form-heading .large-text {
-            font-size: 40px;
-            font-weight: bold;
-        }
+
+            .form-heading .large-text {
+                font-size: 40px;
+                font-weight: bold;
+            }
+
         .switch-container {
             text-align: center;
             margin-bottom: 20px;
         }
-        .switch-container button {
-            background-color: #fff;
-            border: 1px solid #212529;
-            border-radius:15px;
-            color: #000;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 10px 20px;
-            margin: 0 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        .switch-container button.active {
-            background-color: #212529;
-            color: #fff;
-            border-radius:15px;
-        }
+
+            .switch-container button {
+                background-color: #fff;
+                border: 1px solid #212529;
+                border-radius: 15px;
+                color: #000;
+                cursor: pointer;
+                font-size: 18px;
+                font-weight: bold;
+                padding: 10px 20px;
+                margin: 0 5px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+                .switch-container button.active {
+                    background-color: #212529;
+                    color: #fff;
+                    border-radius: 15px;
+                }
+
         .row {
             display: flex;
             flex-wrap: wrap;
         }
+
         .col-half {
             flex: 0 0 50%;
             max-width: 50%;
             padding: 0 10px;
             box-sizing: border-box;
         }
+
         .col-full {
             flex: 0 0 100%;
             max-width: 100%;
             padding: 0 10px;
             box-sizing: border-box;
         }
+
         label {
             font-weight: bold;
             margin-bottom: 5px;
             display: block;
         }
+
         .login-text {
             text-align: center;
             margin-top: 20px;
         }
+
         .login-link {
             color: #007bff;
             text-decoration: none;
             font-weight: bold;
         }
-        .login-link:hover {
-            text-decoration: underline;
+
+            .login-link:hover {
+                text-decoration: underline;
+            }
+
+        .footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
         }
+
+            .footer a {
+                color: #fddc5c;
+                text-decoration: none;
+            }
+
+                .footer a:hover {
+                    text-decoration: underline;
+                }
     </style>
     <script>
         function switchForm(type) {
@@ -167,7 +211,7 @@
         }
 
         window.onload = function () {
-            switchForm('user'); 
+            switchForm('user');
         };
     </script>
 </head>
@@ -227,7 +271,7 @@
                     </div>
                     <div class="col-full">
                         <asp:Button ID="btnUserRegister" runat="server" OnClick="UserRegister_Click" Text="Register" CssClass="btn btn-register" OnClientClick="return validateForm();" />
-                                    
+
                         <div class="login-text">
                             <span>Already have an account? </span>
                             <asp:HyperLink ID="lnkLogin" runat="server" NavigateUrl="~/Login.aspx" CssClass="login-link">Click here to login</asp:HyperLink>
@@ -236,7 +280,7 @@
                     </div>
                 </div>
             </div>
-            <div id="partnerForm" class="register-form" style="display:none;">
+            <div id="partnerForm" class="register-form" style="display: none;">
                 <div class="row">
                     <div class="col-half">
                         <div class="form-group">
@@ -284,6 +328,18 @@
 
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-container">
+                <p>&copy; 2024 DEBRA Event Management Company. All rights reserved.</p>
+                <p>
+                    Follow us on 
+             <a href="#">Facebook</a>, 
+             <a href="#">X</a>, 
+             <a href="#">Instagram</a>
+                </p>
             </div>
         </div>
     </form>
