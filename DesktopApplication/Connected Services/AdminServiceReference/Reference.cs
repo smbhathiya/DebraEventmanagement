@@ -36,6 +36,20 @@ namespace DesktopApplication.AdminServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteEvent", ReplyAction="*")]
         System.Threading.Tasks.Task<string> DeleteEventAsync(string eventid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPartners", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet GetPartners();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPartners", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GetPartnersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeletePartnerByEmail", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool DeletePartnerByEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeletePartnerByEmail", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> DeletePartnerByEmailAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -87,6 +101,22 @@ namespace DesktopApplication.AdminServiceReference {
         
         public System.Threading.Tasks.Task<string> DeleteEventAsync(string eventid) {
             return base.Channel.DeleteEventAsync(eventid);
+        }
+        
+        public System.Data.DataSet GetPartners() {
+            return base.Channel.GetPartners();
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GetPartnersAsync() {
+            return base.Channel.GetPartnersAsync();
+        }
+        
+        public bool DeletePartnerByEmail(string email) {
+            return base.Channel.DeletePartnerByEmail(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeletePartnerByEmailAsync(string email) {
+            return base.Channel.DeletePartnerByEmailAsync(email);
         }
     }
 }

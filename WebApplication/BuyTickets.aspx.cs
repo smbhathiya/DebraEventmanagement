@@ -89,24 +89,23 @@ namespace WebApplication1
                     BuyTicketsWebServiceSoapClient service = new BuyTicketsWebServiceSoapClient();
                     decimal totalPrice = service.CalculateTotalPrice(eventId, ticketCount);
 
-                    string result = service.PurchaseTickets(eventId, ticketCount, email, totalPrice);
-
-                    string script = $@"<script>alert('{result}'); window.location.href = 'Home.aspx';</script>";
-                    ClientScript.RegisterStartupScript(this.GetType(), "PurchaseSuccessScript", script);
-
+                    // Redirect to Payment Portal with necessary details
+                    string redirectUrl = $"PaymentPortal.aspx?eventId={eventId}&ticketCount={ticketCount}&totalPrice={totalPrice}&email={email}";
+                    Response.Redirect(redirectUrl);
                 }
                 else
                 {
                     Response.Redirect("Login.aspx");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                lblErrorMessage.Text = "An error occurred: " + ex.Message;
+                lblErrorMessage.Text = "Please enter ticket counts in the box";
                 lblErrorMessage.Visible = true;
             }
         }
+
     }
 
 
-    }
+}

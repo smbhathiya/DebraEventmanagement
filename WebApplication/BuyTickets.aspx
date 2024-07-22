@@ -91,13 +91,13 @@
 
             .event-details img {
                 max-width: 100%;
-                border-radius: 10px;
+                border-radius: 15px;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 transition: transform 0.3s ease;
             }
 
                 .event-details img:hover {
-                    transform: scale(1.1);
+                    transform: scale(1.3);
                 }
 
             .event-details h2 {
@@ -249,7 +249,7 @@
         <div class="container mt-4">
             <div class="row event-details">
                 <div class="col-md-4">
-                    <asp:Image ID="imgEvent" runat="server" CssClass="img-fluid rounded shadow-sm" />
+                    <asp:Image ID="imgEvent" runat="server" CssClass="img-fluid shadow-sm" />
                 </div>
                 <div class="col-md-8">
                     <div class="container">

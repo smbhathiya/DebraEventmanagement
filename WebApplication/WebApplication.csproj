@@ -245,6 +245,7 @@
     <Content Include="Home.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="partnerProfile.aspx" />
+    <Content Include="PaymentPortal.aspx" />
     <Content Include="userProfile.aspx" />
     <Content Include="Registration.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -418,6 +419,13 @@
     </Compile>
     <Compile Include="partnerProfile.aspx.designer.cs">
       <DependentUpon>partnerProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentPortal.aspx.cs">
+      <DependentUpon>PaymentPortal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentPortal.aspx.designer.cs">
+      <DependentUpon>PaymentPortal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
