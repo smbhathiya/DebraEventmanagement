@@ -216,10 +216,7 @@ namespace WebApplication1
             Response.Redirect("~/Login.aspx");
         }
 
-        protected void btnSearch_Click1(object sender, EventArgs e)
-        {
-            // Implement search functionality
-        }
+
 
         protected void DeleteEvent_Click(object sender, EventArgs e)
         {

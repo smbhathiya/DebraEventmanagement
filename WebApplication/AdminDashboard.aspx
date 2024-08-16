@@ -223,14 +223,7 @@
                 </div>
 
                 <div class="container d-flex justify-content-center">
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Enter Event Name"></asp:TextBox>
-                        </div>
-                        <div class="col-4">
-                            <asp:Button ID="btnAddEvent" runat="server" Text="Search Event" CssClass="btn btn-custom" />
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div class="table-container">

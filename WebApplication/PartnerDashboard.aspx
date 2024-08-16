@@ -132,6 +132,8 @@
             margin-top: 20px;
         }
 
+
+
         .btn-custom {
             background-color: #212529;
             color: #fff;
@@ -333,12 +335,7 @@
                 <div class="container">
                     <div class="container d-flex justify-content-center">
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                                <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Enter Event ID or Name"></asp:TextBox>
-                            </div>
-                            <div class="col-auto">
-                                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-custom" OnClientClick="showSection('searchEventSection'); return false;" OnClick="btnSearch_Click1" />
-                            </div>
+                            
                             <div class="col-auto">
                                 <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" CssClass="btn btn-custom" OnClientClick="showSection('addEventSection'); return false;" />
                             </div>
